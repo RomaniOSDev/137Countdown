@@ -3,33 +3,97 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 60;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		3004893A2F96C0B400B3ED85 /* AppExternalURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300489012F96C0B400B3ED85 /* AppExternalURL.swift */; };
+		3004893B2F96C0B400B3ED85 /* CompletedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300489032F96C0B400B3ED85 /* CompletedEvent.swift */; };
+		3004893C2F96C0B400B3ED85 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300489042F96C0B400B3ED85 /* Event.swift */; };
+		3004893D2F96C0B400B3ED85 /* EventCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300489052F96C0B400B3ED85 /* EventCategory.swift */; };
+		3004893E2F96C0B400B3ED85 /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300489062F96C0B400B3ED85 /* Quote.swift */; };
+		3004893F2F96C0B400B3ED85 /* RecurrenceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300489072F96C0B400B3ED85 /* RecurrenceRule.swift */; };
+		300489402F96C0B400B3ED85 /* ReminderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300489082F96C0B400B3ED85 /* ReminderType.swift */; };
+		300489412F96C0B400B3ED85 /* CountdownColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004890A2F96C0B400B3ED85 /* CountdownColors.swift */; };
+		300489422F96C0B400B3ED85 /* CountdownVisualStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004890B2F96C0B400B3ED85 /* CountdownVisualStyle.swift */; };
+		300489432F96C0B400B3ED85 /* EventColorTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004890C2F96C0B400B3ED85 /* EventColorTag.swift */; };
+		300489442F96C0B400B3ED85 /* DateFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004890E2F96C0B400B3ED85 /* DateFormatting.swift */; };
+		300489452F96C0B400B3ED85 /* EventListQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004890F2F96C0B400B3ED85 /* EventListQuery.swift */; };
+		300489462F96C0B400B3ED85 /* EventOccurrence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300489102F96C0B400B3ED85 /* EventOccurrence.swift */; };
+		300489472F96C0B400B3ED85 /* CountdownViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300489122F96C0B400B3ED85 /* CountdownViewModel.swift */; };
+		300489482F96C0B400B3ED85 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300489142F96C0B400B3ED85 /* CalendarView.swift */; };
+		300489492F96C0B400B3ED85 /* CompletedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300489162F96C0B400B3ED85 /* CompletedView.swift */; };
+		3004894A2F96C0B400B3ED85 /* CalendarDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300489182F96C0B400B3ED85 /* CalendarDayCell.swift */; };
+		3004894B2F96C0B400B3ED85 /* CompletedEventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300489192F96C0B400B3ED85 /* CompletedEventCard.swift */; };
+		3004894C2F96C0B400B3ED85 /* EventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004891A2F96C0B400B3ED85 /* EventCard.swift */; };
+		3004894D2F96C0B400B3ED85 /* EventRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004891B2F96C0B400B3ED85 /* EventRow.swift */; };
+		3004894E2F96C0B400B3ED85 /* MiniEventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004891C2F96C0B400B3ED85 /* MiniEventCard.swift */; };
+		3004894F2F96C0B400B3ED85 /* QuoteCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004891D2F96C0B400B3ED85 /* QuoteCard.swift */; };
+		300489502F96C0B400B3ED85 /* StatCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004891E2F96C0B400B3ED85 /* StatCard.swift */; };
+		300489512F96C0B400B3ED85 /* AddEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300489202F96C0B400B3ED85 /* AddEventView.swift */; };
+		300489522F96C0B400B3ED85 /* EditEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300489212F96C0B400B3ED85 /* EditEventView.swift */; };
+		300489532F96C0B400B3ED85 /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300489222F96C0B400B3ED85 /* EventDetailView.swift */; };
+		300489542F96C0B400B3ED85 /* EventsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300489232F96C0B400B3ED85 /* EventsListView.swift */; };
+		300489552F96C0B400B3ED85 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300489252F96C0B400B3ED85 /* HomeView.swift */; };
+		300489562F96C0B400B3ED85 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300489272F96C0B400B3ED85 /* OnboardingView.swift */; };
+		300489572F96C0B400B3ED85 /* QuotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300489292F96C0B400B3ED85 /* QuotesView.swift */; };
+		300489582F96C0B400B3ED85 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004892B2F96C0B400B3ED85 /* SettingsView.swift */; };
+		300489592F96C0B400B3ED85 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004892E2F96C0B400B3ED85 /* AppDelegate.swift */; };
+		3004895A2F96C0B400B3ED85 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300489302F96C0B400B3ED85 /* ContentView.swift */; };
+		3004895B2F96C0B400B3ED85 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300489362F96C0B400B3ED85 /* RootView.swift */; };
+		3004895C2F96C0B400B3ED85 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300489372F96C0B400B3ED85 /* SceneDelegate.swift */; };
+		3004895D2F96C0B400B3ED85 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300489382F96C0B400B3ED85 /* ViewController.swift */; };
+		3004895E2F96C0B400B3ED85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3004892F2F96C0B400B3ED85 /* Assets.xcassets */; };
+		300489602F96C0B400B3ED85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 300489332F96C0B400B3ED85 /* LaunchScreen.storyboard */; };
+		300489612F96C0B400B3ED85 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 300489352F96C0B400B3ED85 /* Main.storyboard */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		300489012F96C0B400B3ED85 /* AppExternalURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppExternalURL.swift; sourceTree = "<group>"; };
+		300489032F96C0B400B3ED85 /* CompletedEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedEvent.swift; sourceTree = "<group>"; };
+		300489042F96C0B400B3ED85 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		300489052F96C0B400B3ED85 /* EventCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCategory.swift; sourceTree = "<group>"; };
+		300489062F96C0B400B3ED85 /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
+		300489072F96C0B400B3ED85 /* RecurrenceRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurrenceRule.swift; sourceTree = "<group>"; };
+		300489082F96C0B400B3ED85 /* ReminderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderType.swift; sourceTree = "<group>"; };
+		3004890A2F96C0B400B3ED85 /* CountdownColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownColors.swift; sourceTree = "<group>"; };
+		3004890B2F96C0B400B3ED85 /* CountdownVisualStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownVisualStyle.swift; sourceTree = "<group>"; };
+		3004890C2F96C0B400B3ED85 /* EventColorTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventColorTag.swift; sourceTree = "<group>"; };
+		3004890E2F96C0B400B3ED85 /* DateFormatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatting.swift; sourceTree = "<group>"; };
+		3004890F2F96C0B400B3ED85 /* EventListQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListQuery.swift; sourceTree = "<group>"; };
+		300489102F96C0B400B3ED85 /* EventOccurrence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventOccurrence.swift; sourceTree = "<group>"; };
+		300489122F96C0B400B3ED85 /* CountdownViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownViewModel.swift; sourceTree = "<group>"; };
+		300489142F96C0B400B3ED85 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		300489162F96C0B400B3ED85 /* CompletedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedView.swift; sourceTree = "<group>"; };
+		300489182F96C0B400B3ED85 /* CalendarDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDayCell.swift; sourceTree = "<group>"; };
+		300489192F96C0B400B3ED85 /* CompletedEventCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedEventCard.swift; sourceTree = "<group>"; };
+		3004891A2F96C0B400B3ED85 /* EventCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCard.swift; sourceTree = "<group>"; };
+		3004891B2F96C0B400B3ED85 /* EventRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRow.swift; sourceTree = "<group>"; };
+		3004891C2F96C0B400B3ED85 /* MiniEventCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniEventCard.swift; sourceTree = "<group>"; };
+		3004891D2F96C0B400B3ED85 /* QuoteCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteCard.swift; sourceTree = "<group>"; };
+		3004891E2F96C0B400B3ED85 /* StatCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatCard.swift; sourceTree = "<group>"; };
+		300489202F96C0B400B3ED85 /* AddEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventView.swift; sourceTree = "<group>"; };
+		300489212F96C0B400B3ED85 /* EditEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEventView.swift; sourceTree = "<group>"; };
+		300489222F96C0B400B3ED85 /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
+		300489232F96C0B400B3ED85 /* EventsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListView.swift; sourceTree = "<group>"; };
+		300489252F96C0B400B3ED85 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		300489272F96C0B400B3ED85 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		300489292F96C0B400B3ED85 /* QuotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesView.swift; sourceTree = "<group>"; };
+		3004892B2F96C0B400B3ED85 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		3004892E2F96C0B400B3ED85 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3004892F2F96C0B400B3ED85 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		300489302F96C0B400B3ED85 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		300489312F96C0B400B3ED85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		300489322F96C0B400B3ED85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		300489342F96C0B400B3ED85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		300489362F96C0B400B3ED85 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		300489372F96C0B400B3ED85 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		300489382F96C0B400B3ED85 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		30543C602F917C96000323B9 /* 137Countdown.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 137Countdown.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		565E7D4AD1D3061E8C00A9B9 /* Pods-137Countdown.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-137Countdown.release.xcconfig"; path = "Target Support Files/Pods-137Countdown/Pods-137Countdown.release.xcconfig"; sourceTree = "<group>"; };
+		AB177E12DEFC0421E4F8D697 /* Pods_137Countdown.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_137Countdown.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E09E370ED06FEC82DF62DFB9 /* Pods-137Countdown.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-137Countdown.debug.xcconfig"; path = "Target Support Files/Pods-137Countdown/Pods-137Countdown.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		30543C722F917C96000323B9 /* Exceptions for "137Countdown" folder in "137Countdown" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 30543C5F2F917C96000323B9 /* 137Countdown */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		30543C622F917C96000323B9 /* 137Countdown */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				30543C722F917C96000323B9 /* Exceptions for "137Countdown" folder in "137Countdown" target */,
-			);
-			path = 137Countdown;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		30543C5D2F917C96000323B9 /* Frameworks */ = {
@@ -42,11 +106,189 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		13572BCE06FDA68ECABD2AFE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AB177E12DEFC0421E4F8D697 /* Pods_137Countdown.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		300489022F96C0B400B3ED85 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				300489012F96C0B400B3ED85 /* AppExternalURL.swift */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		300489092F96C0B400B3ED85 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				300489032F96C0B400B3ED85 /* CompletedEvent.swift */,
+				300489042F96C0B400B3ED85 /* Event.swift */,
+				300489052F96C0B400B3ED85 /* EventCategory.swift */,
+				300489062F96C0B400B3ED85 /* Quote.swift */,
+				300489072F96C0B400B3ED85 /* RecurrenceRule.swift */,
+				300489082F96C0B400B3ED85 /* ReminderType.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3004890D2F96C0B400B3ED85 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				3004890A2F96C0B400B3ED85 /* CountdownColors.swift */,
+				3004890B2F96C0B400B3ED85 /* CountdownVisualStyle.swift */,
+				3004890C2F96C0B400B3ED85 /* EventColorTag.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		300489112F96C0B400B3ED85 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				3004890E2F96C0B400B3ED85 /* DateFormatting.swift */,
+				3004890F2F96C0B400B3ED85 /* EventListQuery.swift */,
+				300489102F96C0B400B3ED85 /* EventOccurrence.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		300489132F96C0B400B3ED85 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				300489122F96C0B400B3ED85 /* CountdownViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		300489152F96C0B400B3ED85 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				300489142F96C0B400B3ED85 /* CalendarView.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		300489172F96C0B400B3ED85 /* Completed */ = {
+			isa = PBXGroup;
+			children = (
+				300489162F96C0B400B3ED85 /* CompletedView.swift */,
+			);
+			path = Completed;
+			sourceTree = "<group>";
+		};
+		3004891F2F96C0B400B3ED85 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				300489182F96C0B400B3ED85 /* CalendarDayCell.swift */,
+				300489192F96C0B400B3ED85 /* CompletedEventCard.swift */,
+				3004891A2F96C0B400B3ED85 /* EventCard.swift */,
+				3004891B2F96C0B400B3ED85 /* EventRow.swift */,
+				3004891C2F96C0B400B3ED85 /* MiniEventCard.swift */,
+				3004891D2F96C0B400B3ED85 /* QuoteCard.swift */,
+				3004891E2F96C0B400B3ED85 /* StatCard.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		300489242F96C0B400B3ED85 /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				300489202F96C0B400B3ED85 /* AddEventView.swift */,
+				300489212F96C0B400B3ED85 /* EditEventView.swift */,
+				300489222F96C0B400B3ED85 /* EventDetailView.swift */,
+				300489232F96C0B400B3ED85 /* EventsListView.swift */,
+			);
+			path = Events;
+			sourceTree = "<group>";
+		};
+		300489262F96C0B400B3ED85 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				300489252F96C0B400B3ED85 /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		300489282F96C0B400B3ED85 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				300489272F96C0B400B3ED85 /* OnboardingView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		3004892A2F96C0B400B3ED85 /* Quotes */ = {
+			isa = PBXGroup;
+			children = (
+				300489292F96C0B400B3ED85 /* QuotesView.swift */,
+			);
+			path = Quotes;
+			sourceTree = "<group>";
+		};
+		3004892C2F96C0B400B3ED85 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				3004892B2F96C0B400B3ED85 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		3004892D2F96C0B400B3ED85 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				300489152F96C0B400B3ED85 /* Calendar */,
+				300489172F96C0B400B3ED85 /* Completed */,
+				3004891F2F96C0B400B3ED85 /* Components */,
+				300489242F96C0B400B3ED85 /* Events */,
+				300489262F96C0B400B3ED85 /* Home */,
+				300489282F96C0B400B3ED85 /* Onboarding */,
+				3004892A2F96C0B400B3ED85 /* Quotes */,
+				3004892C2F96C0B400B3ED85 /* Settings */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		300489392F96C0B400B3ED85 /* 137Countdown */ = {
+			isa = PBXGroup;
+			children = (
+				300489022F96C0B400B3ED85 /* Configuration */,
+				300489092F96C0B400B3ED85 /* Models */,
+				3004890D2F96C0B400B3ED85 /* Theme */,
+				300489112F96C0B400B3ED85 /* Utilities */,
+				300489132F96C0B400B3ED85 /* ViewModels */,
+				3004892D2F96C0B400B3ED85 /* Views */,
+				3004892E2F96C0B400B3ED85 /* AppDelegate.swift */,
+				3004892F2F96C0B400B3ED85 /* Assets.xcassets */,
+				300489302F96C0B400B3ED85 /* ContentView.swift */,
+				300489312F96C0B400B3ED85 /* Info.plist */,
+				300489332F96C0B400B3ED85 /* LaunchScreen.storyboard */,
+				300489352F96C0B400B3ED85 /* Main.storyboard */,
+				300489362F96C0B400B3ED85 /* RootView.swift */,
+				300489372F96C0B400B3ED85 /* SceneDelegate.swift */,
+				300489382F96C0B400B3ED85 /* ViewController.swift */,
+			);
+			path = 137Countdown;
+			sourceTree = "<group>";
+		};
+		3021AB3F79CD858E5A6C1069 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E09E370ED06FEC82DF62DFB9 /* Pods-137Countdown.debug.xcconfig */,
+				565E7D4AD1D3061E8C00A9B9 /* Pods-137Countdown.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		30543C572F917C96000323B9 = {
 			isa = PBXGroup;
 			children = (
-				30543C622F917C96000323B9 /* 137Countdown */,
+				300489392F96C0B400B3ED85 /* 137Countdown */,
 				30543C612F917C96000323B9 /* Products */,
+				3021AB3F79CD858E5A6C1069 /* Pods */,
+				13572BCE06FDA68ECABD2AFE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -65,6 +307,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 30543C732F917C96000323B9 /* Build configuration list for PBXNativeTarget "137Countdown" */;
 			buildPhases = (
+				0AB8BDFD2BE5A6843F6B51AE /* [CP] Check Pods Manifest.lock */,
 				30543C5C2F917C96000323B9 /* Sources */,
 				30543C5D2F917C96000323B9 /* Frameworks */,
 				30543C5E2F917C96000323B9 /* Resources */,
@@ -73,12 +316,7 @@
 			);
 			dependencies = (
 			);
-			fileSystemSynchronizedGroups = (
-				30543C622F917C96000323B9 /* 137Countdown */,
-			);
 			name = 137Countdown;
-			packageProductDependencies = (
-			);
 			productName = 137Countdown;
 			productReference = 30543C602F917C96000323B9 /* 137Countdown.app */;
 			productType = "com.apple.product-type.application";
@@ -99,6 +337,7 @@
 				};
 			};
 			buildConfigurationList = 30543C5B2F917C96000323B9 /* Build configuration list for PBXProject "137Countdown" */;
+			compatibilityVersion = "Xcode 15.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -106,8 +345,6 @@
 				Base,
 			);
 			mainGroup = 30543C572F917C96000323B9;
-			minimizedProjectReferenceProxies = 1;
-			preferredProjectObjectVersion = 77;
 			productRefGroup = 30543C612F917C96000323B9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -122,24 +359,108 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3004895E2F96C0B400B3ED85 /* Assets.xcassets in Resources */,
+				300489602F96C0B400B3ED85 /* LaunchScreen.storyboard in Resources */,
+				300489612F96C0B400B3ED85 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0AB8BDFD2BE5A6843F6B51AE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-137Countdown-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		30543C5C2F917C96000323B9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3004893A2F96C0B400B3ED85 /* AppExternalURL.swift in Sources */,
+				3004893B2F96C0B400B3ED85 /* CompletedEvent.swift in Sources */,
+				3004893C2F96C0B400B3ED85 /* Event.swift in Sources */,
+				3004893D2F96C0B400B3ED85 /* EventCategory.swift in Sources */,
+				3004893E2F96C0B400B3ED85 /* Quote.swift in Sources */,
+				3004893F2F96C0B400B3ED85 /* RecurrenceRule.swift in Sources */,
+				300489402F96C0B400B3ED85 /* ReminderType.swift in Sources */,
+				300489412F96C0B400B3ED85 /* CountdownColors.swift in Sources */,
+				300489422F96C0B400B3ED85 /* CountdownVisualStyle.swift in Sources */,
+				300489432F96C0B400B3ED85 /* EventColorTag.swift in Sources */,
+				300489442F96C0B400B3ED85 /* DateFormatting.swift in Sources */,
+				300489452F96C0B400B3ED85 /* EventListQuery.swift in Sources */,
+				300489462F96C0B400B3ED85 /* EventOccurrence.swift in Sources */,
+				300489472F96C0B400B3ED85 /* CountdownViewModel.swift in Sources */,
+				300489482F96C0B400B3ED85 /* CalendarView.swift in Sources */,
+				300489492F96C0B400B3ED85 /* CompletedView.swift in Sources */,
+				3004894A2F96C0B400B3ED85 /* CalendarDayCell.swift in Sources */,
+				3004894B2F96C0B400B3ED85 /* CompletedEventCard.swift in Sources */,
+				3004894C2F96C0B400B3ED85 /* EventCard.swift in Sources */,
+				3004894D2F96C0B400B3ED85 /* EventRow.swift in Sources */,
+				3004894E2F96C0B400B3ED85 /* MiniEventCard.swift in Sources */,
+				3004894F2F96C0B400B3ED85 /* QuoteCard.swift in Sources */,
+				300489502F96C0B400B3ED85 /* StatCard.swift in Sources */,
+				300489512F96C0B400B3ED85 /* AddEventView.swift in Sources */,
+				300489522F96C0B400B3ED85 /* EditEventView.swift in Sources */,
+				300489532F96C0B400B3ED85 /* EventDetailView.swift in Sources */,
+				300489542F96C0B400B3ED85 /* EventsListView.swift in Sources */,
+				300489552F96C0B400B3ED85 /* HomeView.swift in Sources */,
+				300489562F96C0B400B3ED85 /* OnboardingView.swift in Sources */,
+				300489572F96C0B400B3ED85 /* QuotesView.swift in Sources */,
+				300489582F96C0B400B3ED85 /* SettingsView.swift in Sources */,
+				300489592F96C0B400B3ED85 /* AppDelegate.swift in Sources */,
+				3004895A2F96C0B400B3ED85 /* ContentView.swift in Sources */,
+				3004895B2F96C0B400B3ED85 /* RootView.swift in Sources */,
+				3004895C2F96C0B400B3ED85 /* SceneDelegate.swift in Sources */,
+				3004895D2F96C0B400B3ED85 /* ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXVariantGroup section */
+		300489332F96C0B400B3ED85 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				300489322F96C0B400B3ED85 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		300489352F96C0B400B3ED85 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				300489342F96C0B400B3ED85 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		30543C742F917C96000323B9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E09E370ED06FEC82DF62DFB9 /* Pods-137Countdown.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -147,30 +468,35 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = 137Countdown/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "The Vibe: Soul Schedule";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "home.-37Countdown";
+				PRODUCT_BUNDLE_IDENTIFIER = com.fut.th3v6bs0lsc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		30543C752F917C96000323B9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 565E7D4AD1D3061E8C00A9B9 /* Pods-137Countdown.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -178,25 +504,29 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = 137Countdown/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "The Vibe: Soul Schedule";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "home.-37Countdown";
+				PRODUCT_BUNDLE_IDENTIFIER = com.fut.th3v6bs0lsc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -252,7 +582,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -309,7 +639,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
