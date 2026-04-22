@@ -13,6 +13,8 @@ struct EventDetailView: View {
 
     @State private var showEditSheet = false
     @State private var showDeleteConfirmation = false
+    @State private var showShareSheet = false
+    @State private var shareItems: [Any] = []
 
     init(viewModel: CountdownViewModel, event: Event) {
         self.viewModel = viewModel
@@ -30,6 +32,7 @@ struct EventDetailView: View {
                     VStack(spacing: 20) {
                         header(event)
                         details(event)
+                        shareSection(event)
                         actions(event)
                     }
                     .padding(.bottom, 28)
@@ -40,6 +43,9 @@ struct EventDetailView: View {
                 .toolbarBackground(.regularMaterial, for: .navigationBar)
                 .sheet(isPresented: $showEditSheet) {
                     EditEventView(viewModel: viewModel, event: event)
+                }
+                .sheet(isPresented: $showShareSheet, onDismiss: { shareItems = [] }) {
+                    ActivityShareSheet(items: shareItems)
                 }
                 .alert("Delete this event?", isPresented: $showDeleteConfirmation) {
                     Button("Delete", role: .destructive) {
@@ -160,6 +166,16 @@ struct EventDetailView: View {
                 }
             }
 
+            if event.isSpotlight {
+                HStack {
+                    Image(systemName: "pin.fill")
+                        .foregroundColor(.countdownAccent)
+                        .frame(width: 24)
+                    Text("Main event — shown on the Home screen.")
+                        .foregroundColor(.black)
+                }
+            }
+
             if event.recurrenceRule != .none {
                 HStack(alignment: .top) {
                     Image(systemName: "repeat")
@@ -195,6 +211,16 @@ struct EventDetailView: View {
                 }
             }
 
+            if !event.tags.isEmpty {
+                HStack(alignment: .top) {
+                    Image(systemName: "number")
+                        .foregroundColor(.countdownAccent)
+                        .frame(width: 24)
+                    Text(event.tags.map { "#\($0)" }.joined(separator: " "))
+                        .foregroundColor(.black)
+                }
+            }
+
             HStack {
                 Image(systemName: "bell.fill")
                     .foregroundColor(.countdownAccent)
@@ -202,11 +228,102 @@ struct EventDetailView: View {
                 Text(event.reminder.rawValue)
                     .foregroundColor(.black)
             }
+
+            HStack(alignment: .top) {
+                Image(systemName: "flag.checkered")
+                    .foregroundColor(.countdownAccent)
+                    .frame(width: 24)
+                Text(
+                    event.milestoneCheckpointsEnabled
+                        ? "Milestones: local alerts at 30, 7, and 1 day before (9:00)."
+                        : "Milestone checkpoints are off."
+                )
+                .font(.subheadline)
+                .foregroundColor(.black)
+            }
         }
         .padding(18)
         .frame(maxWidth: .infinity, alignment: .leading)
         .countdownRaisedCard(cornerRadius: 20, panel: true)
         .padding(.horizontal, 4)
+    }
+
+    @ViewBuilder
+    private func shareSection(_ event: Event) -> some View {
+        VStack(alignment: .leading, spacing: 14) {
+            Text("Share & export")
+                .font(.headline)
+                .foregroundColor(.black)
+
+            Button {
+                if let img = EventShareImageRenderer.renderPNG(event: event) {
+                    shareItems = [img]
+                    showShareSheet = true
+                }
+            } label: {
+                Label("Share countdown card (image)", systemImage: "photo.on.rectangle.angled")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .tint(.countdownAccent)
+
+            ShareLink(item: sharePlainText(for: event), subject: Text(event.title), message: Text("Shared from The Vibe: Soul Schedule")) {
+                Label("Share as text", systemImage: "text.alignleft")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .tint(.countdownAccent)
+
+            if let url = temporaryICSFileURL(for: event) {
+                ShareLink(item: url, preview: SharePreview("Calendar (.ics)")) {
+                    Label("Export calendar (.ics)", systemImage: "calendar.badge.plus")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .tint(.countdownAccent)
+            }
+
+            Button {
+                if event.isSpotlight {
+                    viewModel.setSpotlight(nil)
+                } else {
+                    viewModel.setSpotlight(event)
+                }
+            } label: {
+                Label(
+                    event.isSpotlight ? "Unpin main event" : "Pin as main event",
+                    systemImage: event.isSpotlight ? "pin.slash" : "pin.fill"
+                )
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .tint(.countdownAccent)
+        }
+        .padding(18)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .countdownRaisedCard(cornerRadius: 20, panel: true)
+        .padding(.horizontal, 4)
+    }
+
+    private func sharePlainText(for event: Event) -> String {
+        if event.isPast {
+            return "“\(event.title)” — \(event.statusText). (\(event.formattedDateTime))"
+        }
+        if event.isToday {
+            return "Today is the day: “\(event.title)”! (\(event.formattedDateTime))"
+        }
+        return "“\(event.title)” — \(event.daysLeft) \(event.daysUnitDetail) until \(event.formattedDate)."
+    }
+
+    private func temporaryICSFileURL(for event: Event) -> URL? {
+        let ics = EventCalendarExport.icsDocument(for: event)
+        let safe = event.title
+            .replacingOccurrences(of: "/", with: "-")
+            .replacingOccurrences(of: ":", with: "-")
+        let url = FileManager.default.temporaryDirectory.appendingPathComponent("\(safe)-countdown.ics")
+        guard let data = ics.data(using: .utf8) else { return nil }
+        do {
+            try data.write(to: url, options: .atomic)
+            return url
+        } catch {
+            return nil
+        }
     }
 
     @ViewBuilder

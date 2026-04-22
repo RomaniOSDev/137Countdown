@@ -21,6 +21,9 @@ struct EditEventView: View {
     @State private var isFavorite = false
     @State private var colorTag: EventColorTag = .none
     @State private var recurrenceRule: RecurrenceRule = .none
+    @State private var tagsRaw = ""
+    @State private var milestoneCheckpointsEnabled = true
+    @State private var pinAsSpotlight = false
 
     init(viewModel: CountdownViewModel, event: Event) {
         self.viewModel = viewModel
@@ -35,6 +38,9 @@ struct EditEventView: View {
         _isFavorite = State(initialValue: event.isFavorite)
         _colorTag = State(initialValue: event.colorTag)
         _recurrenceRule = State(initialValue: event.recurrenceRule)
+        _tagsRaw = State(initialValue: EventTagsParser.displayString(from: event.tags))
+        _milestoneCheckpointsEnabled = State(initialValue: event.milestoneCheckpointsEnabled)
+        _pinAsSpotlight = State(initialValue: event.isSpotlight)
     }
 
     private var trimmedTitle: String {
@@ -61,6 +67,12 @@ struct EditEventView: View {
                             }
                         }
                         .tint(.countdownAccent)
+                    }
+
+                    Section(header: Text("Tags").foregroundColor(.gray)) {
+                        TextField("Comma-separated", text: $tagsRaw)
+                            .foregroundColor(.black)
+                            .tint(.countdownAccent)
                     }
 
                     Section(header: Text("Color tag").foregroundColor(.gray)) {
@@ -116,8 +128,15 @@ struct EditEventView: View {
                         }
                     }
 
+                    Section(header: Text("Milestones").foregroundColor(.gray)) {
+                        Toggle("30 / 7 / 1 day checkpoints", isOn: $milestoneCheckpointsEnabled)
+                            .tint(.countdownAccent)
+                    }
+
                     Section {
                         Toggle("Add to favorites", isOn: $isFavorite)
+                            .tint(.countdownAccent)
+                        Toggle("Pin as main event on Home", isOn: $pinAsSpotlight)
                             .tint(.countdownAccent)
                     }
                 }
@@ -151,6 +170,7 @@ struct EditEventView: View {
             dismiss()
             return
         }
+        let parsedTags = EventTagsParser.parse(tagsRaw)
         let updated = Event(
             id: existing.id,
             title: trimmedTitle,
@@ -164,7 +184,10 @@ struct EditEventView: View {
             isFavorite: isFavorite,
             createdAt: existing.createdAt,
             colorTag: colorTag,
-            recurrenceRule: recurrenceRule
+            recurrenceRule: recurrenceRule,
+            isSpotlight: pinAsSpotlight,
+            tags: parsedTags,
+            milestoneCheckpointsEnabled: milestoneCheckpointsEnabled
         )
         viewModel.updateEvent(updated)
         dismiss()

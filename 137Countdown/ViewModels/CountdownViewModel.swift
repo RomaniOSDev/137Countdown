@@ -10,6 +10,8 @@ import UserNotifications
 
 @MainActor
 final class CountdownViewModel: ObservableObject {
+    static let firstExperienceCompletedKey = "countdown_firstExperienceCompleted"
+
     @Published var events: [Event] = []
     @Published var quotes: [Quote] = []
     @Published var completedEvents: [CompletedEvent] = []
@@ -66,6 +68,10 @@ final class CountdownViewModel: ObservableObject {
         return sortEvents(filtered, by: sort)
     }
 
+    func matchesTimelineSearch(event: Event, text: String) -> Bool {
+        matchesSearch(event, text: text)
+    }
+
     func quotesMatching(search: String) -> [Quote] {
         let q = search.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !q.isEmpty else { return quotes }
@@ -89,23 +95,50 @@ final class CountdownViewModel: ObservableObject {
     }
 
     func addEvent(_ event: Event) {
-        events.append(event)
-        scheduleNotification(for: event)
+        var e = event
+        if e.isSpotlight {
+            clearSpotlightExcept(id: e.id)
+        }
+        events.append(e)
+        scheduleAllNotifications(for: e)
         saveToUserDefaults()
     }
 
     func updateEvent(_ event: Event) {
         if let index = events.firstIndex(where: { $0.id == event.id }) {
-            cancelNotification(for: events[index])
-            events[index] = event
-            scheduleNotification(for: event)
+            cancelAllNotifications(for: events[index])
+            var e = event
+            if e.isSpotlight {
+                clearSpotlightExcept(id: e.id)
+            }
+            events[index] = e
+            scheduleAllNotifications(for: e)
             saveToUserDefaults()
+        }
+    }
+
+    func setSpotlight(_ event: Event?) {
+        guard let event else {
+            for i in events.indices { events[i].isSpotlight = false }
+            saveToUserDefaults()
+            return
+        }
+        clearSpotlightExcept(id: event.id)
+        if let i = events.firstIndex(where: { $0.id == event.id }) {
+            events[i].isSpotlight = true
+            saveToUserDefaults()
+        }
+    }
+
+    private func clearSpotlightExcept(id: UUID) {
+        for i in events.indices {
+            events[i].isSpotlight = (events[i].id == id)
         }
     }
 
     func deleteEvent(_ event: Event) {
         events.removeAll { $0.id == event.id }
-        cancelNotification(for: event)
+        cancelAllNotifications(for: event)
 
         let completed = CompletedEvent(
             id: UUID(),
@@ -113,7 +146,8 @@ final class CountdownViewModel: ObservableObject {
             title: event.title,
             date: event.displayDate,
             completedDate: Date(),
-            notes: event.notes
+            notes: event.notes,
+            category: event.category
         )
         completedEvents.append(completed)
 
@@ -125,7 +159,7 @@ final class CountdownViewModel: ObservableObject {
             id: completed.eventId,
             title: completed.title,
             date: completed.date,
-            category: .other,
+            category: completed.category ?? .other,
             notes: completed.notes,
             location: nil,
             reminder: .none,
@@ -134,7 +168,10 @@ final class CountdownViewModel: ObservableObject {
             isFavorite: false,
             createdAt: Date(),
             colorTag: .none,
-            recurrenceRule: .none
+            recurrenceRule: .none,
+            isSpotlight: false,
+            tags: [],
+            milestoneCheckpointsEnabled: true
         )
         events.append(restoredEvent)
         completedEvents.removeAll { $0.id == completed.id }
@@ -167,10 +204,13 @@ final class CountdownViewModel: ObservableObject {
             isFavorite: false,
             createdAt: Date(),
             colorTag: event.colorTag,
-            recurrenceRule: event.recurrenceRule
+            recurrenceRule: event.recurrenceRule,
+            isSpotlight: false,
+            tags: event.tags,
+            milestoneCheckpointsEnabled: event.milestoneCheckpointsEnabled
         )
         events.append(newEvent)
-        scheduleNotification(for: newEvent)
+        scheduleAllNotifications(for: newEvent)
         saveToUserDefaults()
     }
 
@@ -206,9 +246,11 @@ final class CountdownViewModel: ObservableObject {
     private func matchesSearch(_ event: Event, text: String) -> Bool {
         let t = text.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !t.isEmpty else { return true }
+        let tagHit = event.tags.contains { $0.localizedCaseInsensitiveContains(t) }
         return event.title.localizedCaseInsensitiveContains(t)
             || (event.location ?? "").localizedCaseInsensitiveContains(t)
             || (event.notes ?? "").localizedCaseInsensitiveContains(t)
+            || tagHit
     }
 
     private func matchesFilter(_ event: Event, scope: EventFilterScope, category: EventCategory?) -> Bool {
@@ -244,7 +286,20 @@ final class CountdownViewModel: ObservableObject {
         }
     }
 
-    private func scheduleNotification(for event: Event) {
+    private func milestoneNotificationIdentifiers(for eventId: UUID) -> [String] {
+        [30, 7, 1].map { "\(eventId.uuidString)-milestone-\($0)" }
+    }
+
+    private func allNotificationIdentifiers(for event: Event) -> [String] {
+        [event.id.uuidString] + milestoneNotificationIdentifiers(for: event.id)
+    }
+
+    private func scheduleAllNotifications(for event: Event) {
+        schedulePrimaryReminder(for: event)
+        scheduleMilestoneReminders(for: event)
+    }
+
+    private func schedulePrimaryReminder(for event: Event) {
         let target = event.displayDate
         guard target > Date() else { return }
 
@@ -285,14 +340,48 @@ final class CountdownViewModel: ObservableObject {
         UNUserNotificationCenter.current().add(request)
     }
 
-    private func cancelNotification(for event: Event) {
-        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [event.id.uuidString])
+    /// Morning notification (9:00) on milestone days: 30, 7, and 1 calendar day before the event day.
+    private func scheduleMilestoneReminders(for event: Event) {
+        guard event.milestoneCheckpointsEnabled else { return }
+        let calendar = Calendar.current
+        let target = event.displayDate
+        guard target > Date() else { return }
+
+        let startOfTarget = calendar.startOfDay(for: target)
+        let startOfToday = calendar.startOfDay(for: Date())
+
+        for daysBefore in [30, 7, 1] {
+            guard let milestoneDay = calendar.date(byAdding: .day, value: -daysBefore, to: startOfTarget) else { continue }
+            if milestoneDay < startOfToday { continue }
+
+            var comps = calendar.dateComponents([.year, .month, .day], from: milestoneDay)
+            comps.hour = 9
+            comps.minute = 0
+            guard let fire = calendar.date(from: comps), fire > Date() else { continue }
+
+            let content = UNMutableNotificationContent()
+            content.title = "Milestone"
+            content.body = daysBefore == 1
+                ? "1 day until “\(event.title)”."
+                : "\(daysBefore) days until “\(event.title)”."
+            content.sound = .default
+
+            let triggerComps = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: fire)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: triggerComps, repeats: false)
+            let id = "\(event.id.uuidString)-milestone-\(daysBefore)"
+            let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
+            UNUserNotificationCenter.current().add(request)
+        }
+    }
+
+    private func cancelAllNotifications(for event: Event) {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: allNotificationIdentifiers(for: event))
     }
 
     private func rescheduleAllNotifications() {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-        for event in events where event.displayDate > Date() && event.reminder != .none {
-            scheduleNotification(for: event)
+        for event in events where event.displayDate > Date() {
+            scheduleAllNotifications(for: event)
         }
     }
 
@@ -328,14 +417,15 @@ final class CountdownViewModel: ObservableObject {
             completedEvents = decoded
         }
 
-        if events.isEmpty {
-            loadDemoData()
+        if !events.isEmpty {
+            UserDefaults.standard.set(true, forKey: Self.firstExperienceCompletedKey)
         }
 
         rescheduleAllNotifications()
     }
 
-    private func loadDemoData() {
+    /// Sample events for exploration (first-run or Settings later).
+    func loadDemoDataForFirstRun() {
         let nextYear = Calendar.current.component(.year, from: Date()) + 1
         let event1 = Event(
             id: UUID(),
@@ -350,7 +440,10 @@ final class CountdownViewModel: ObservableObject {
             isFavorite: true,
             createdAt: Date(),
             colorTag: .coral,
-            recurrenceRule: .yearly
+            recurrenceRule: .yearly,
+            isSpotlight: true,
+            tags: ["holiday", "family"],
+            milestoneCheckpointsEnabled: true
         )
 
         let event2 = Event(
@@ -366,7 +459,10 @@ final class CountdownViewModel: ObservableObject {
             isFavorite: false,
             createdAt: Date(),
             colorTag: .lavender,
-            recurrenceRule: .yearly
+            recurrenceRule: .yearly,
+            isSpotlight: false,
+            tags: ["birthday"],
+            milestoneCheckpointsEnabled: true
         )
 
         let event3 = Event(
@@ -382,7 +478,10 @@ final class CountdownViewModel: ObservableObject {
             isFavorite: true,
             createdAt: Date(),
             colorTag: .sky,
-            recurrenceRule: .none
+            recurrenceRule: .none,
+            isSpotlight: false,
+            tags: ["travel"],
+            milestoneCheckpointsEnabled: true
         )
 
         events = [event1, event2, event3]
@@ -391,6 +490,7 @@ final class CountdownViewModel: ObservableObject {
         let quote2 = Quote(id: UUID(), text: "Happiness is a way of life, not a destination.", author: "Unknown", isFavorite: false)
 
         quotes = [quote1, quote2]
+        rescheduleAllNotifications()
         saveToUserDefaults()
     }
 }

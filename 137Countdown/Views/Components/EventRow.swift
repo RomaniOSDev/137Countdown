@@ -46,6 +46,17 @@ struct EventRow: View {
                                 .font(.caption2)
                                 .foregroundColor(.gray)
                         }
+                        if event.isSpotlight {
+                            Image(systemName: "pin.fill")
+                                .font(.caption2)
+                                .foregroundColor(.countdownAccent)
+                        }
+                    }
+                    if !event.tags.isEmpty {
+                        Text(event.tags.map { "#\($0)" }.joined(separator: " "))
+                            .font(.caption2)
+                            .foregroundColor(.secondary)
+                            .lineLimit(1)
                     }
                 }
 

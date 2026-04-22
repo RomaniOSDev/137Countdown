@@ -13,17 +13,17 @@ struct OnboardingView: View {
     private let pages: [(title: String, subtitle: String, symbol: String)] = [
         (
             "Plan what matters",
-            "Create events, set dates, and watch the countdown update — including recurring birthdays, trips, and deadlines.",
+            "Start from templates or build your own countdown. Pin one main event on Home, add tags, and set milestone alerts at 30, 7, and 1 day before.",
             "calendar.badge.clock"
         ),
         (
-            "Stay organized",
-            "Use Home, filters, color tags, and the calendar to see what is next. Optional reminders keep you on track.",
-            "square.grid.2x2.fill"
+            "See the full story",
+            "Switch between List and Timeline to mix upcoming dates with recent completions. Filter by category, search tags, and export a beautiful share card or a calendar file.",
+            "calendar.day.timeline.left"
         ),
         (
             "Make it yours",
-            "Favorite moments, archive past events, and collect quotes that motivate you — all stored privately on your device.",
+            "Favorite moments, archive past events, and collect quotes — stored privately on your device with optional local notifications.",
             "sparkles"
         )
     ]

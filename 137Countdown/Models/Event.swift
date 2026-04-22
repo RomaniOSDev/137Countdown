@@ -19,6 +19,12 @@ struct Event: Identifiable, Hashable {
     let createdAt: Date
     var colorTag: EventColorTag
     var recurrenceRule: RecurrenceRule
+    /// Pinned “main” event for Home and sharing.
+    var isSpotlight: Bool
+    /// User-defined text tags (lowercased for search).
+    var tags: [String]
+    /// Schedule milestone notifications at 30, 7, and 1 day before the event (start of target day).
+    var milestoneCheckpointsEnabled: Bool
 
     init(
         id: UUID,
@@ -33,7 +39,10 @@ struct Event: Identifiable, Hashable {
         isFavorite: Bool,
         createdAt: Date,
         colorTag: EventColorTag = .none,
-        recurrenceRule: RecurrenceRule = .none
+        recurrenceRule: RecurrenceRule = .none,
+        isSpotlight: Bool = false,
+        tags: [String] = [],
+        milestoneCheckpointsEnabled: Bool = true
     ) {
         self.id = id
         self.title = title
@@ -48,6 +57,9 @@ struct Event: Identifiable, Hashable {
         self.createdAt = createdAt
         self.colorTag = colorTag
         self.recurrenceRule = recurrenceRule
+        self.isSpotlight = isSpotlight
+        self.tags = tags
+        self.milestoneCheckpointsEnabled = milestoneCheckpointsEnabled
     }
 
     /// Next occurrence used for countdown, list dates, and notifications.
@@ -103,6 +115,7 @@ extension Event: Codable {
     private enum CodingKeys: String, CodingKey {
         case id, title, date, category, notes, location, reminder, customReminderDays, imageName, isFavorite, createdAt
         case colorTag, recurrenceRule
+        case isSpotlight, tags, milestoneCheckpointsEnabled
     }
 
     init(from decoder: Decoder) throws {
@@ -120,6 +133,9 @@ extension Event: Codable {
         createdAt = try container.decode(Date.self, forKey: .createdAt)
         colorTag = try container.decodeIfPresent(EventColorTag.self, forKey: .colorTag) ?? .none
         recurrenceRule = try container.decodeIfPresent(RecurrenceRule.self, forKey: .recurrenceRule) ?? .none
+        isSpotlight = try container.decodeIfPresent(Bool.self, forKey: .isSpotlight) ?? false
+        tags = try container.decodeIfPresent([String].self, forKey: .tags) ?? []
+        milestoneCheckpointsEnabled = try container.decodeIfPresent(Bool.self, forKey: .milestoneCheckpointsEnabled) ?? true
     }
 
     func encode(to encoder: Encoder) throws {
@@ -137,5 +153,8 @@ extension Event: Codable {
         try container.encode(createdAt, forKey: .createdAt)
         try container.encode(colorTag, forKey: .colorTag)
         try container.encode(recurrenceRule, forKey: .recurrenceRule)
+        try container.encode(isSpotlight, forKey: .isSpotlight)
+        try container.encode(tags, forKey: .tags)
+        try container.encode(milestoneCheckpointsEnabled, forKey: .milestoneCheckpointsEnabled)
     }
 }

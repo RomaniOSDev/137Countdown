@@ -9,6 +9,9 @@ struct AddEventView: View {
     @Environment(\.dismiss) private var dismiss
     @ObservedObject var viewModel: CountdownViewModel
 
+    private let template: EventTemplate?
+    private let onFinished: (() -> Void)?
+
     @State private var title = ""
     @State private var date = Date()
     @State private var category: EventCategory = .other
@@ -19,6 +22,15 @@ struct AddEventView: View {
     @State private var isFavorite = false
     @State private var colorTag: EventColorTag = .none
     @State private var recurrenceRule: RecurrenceRule = .none
+    @State private var tagsRaw = ""
+    @State private var milestoneCheckpointsEnabled = true
+    @State private var pinAsSpotlight = false
+
+    init(viewModel: CountdownViewModel, template: EventTemplate? = nil, onFinished: (() -> Void)? = nil) {
+        self.viewModel = viewModel
+        self.template = template
+        self.onFinished = onFinished
+    }
 
     private var trimmedTitle: String {
         title.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -30,6 +42,14 @@ struct AddEventView: View {
                 CountdownScreenBackground()
 
                 Form {
+                    if template != nil {
+                        Section {
+                            Label("Prefilled from template — adjust as you like.", systemImage: "doc.text.fill")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+
                     Section {
                         TextField("Event title", text: $title)
                             .foregroundColor(.black)
@@ -44,6 +64,15 @@ struct AddEventView: View {
                             }
                         }
                         .tint(.countdownAccent)
+                    }
+
+                    Section(header: Text("Tags").foregroundColor(.gray)) {
+                        TextField("e.g. family, work, trip", text: $tagsRaw)
+                            .foregroundColor(.black)
+                            .tint(.countdownAccent)
+                        Text("Comma-separated. Used for search.")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
                     }
 
                     Section(header: Text("Color tag").foregroundColor(.gray)) {
@@ -99,8 +128,18 @@ struct AddEventView: View {
                         }
                     }
 
+                    Section(header: Text("Milestones").foregroundColor(.gray)) {
+                        Toggle("30 / 7 / 1 day checkpoints", isOn: $milestoneCheckpointsEnabled)
+                            .tint(.countdownAccent)
+                        Text("Optional local notifications at 9:00 on those milestone days.")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+
                     Section {
                         Toggle("Add to favorites", isOn: $isFavorite)
+                            .tint(.countdownAccent)
+                        Toggle("Pin as main event on Home", isOn: $pinAsSpotlight)
                             .tint(.countdownAccent)
                     }
                 }
@@ -126,10 +165,29 @@ struct AddEventView: View {
                     .disabled(trimmedTitle.isEmpty)
                 }
             }
+            .onAppear {
+                applyTemplateIfNeeded()
+            }
         }
     }
 
+    private func applyTemplateIfNeeded() {
+        guard let t = template else { return }
+        title = t.title
+        date = t.suggestedDate()
+        category = t.category
+        notes = t.notes ?? ""
+        reminderType = t.reminder
+        if t.reminder == .custom {
+            customReminderDays = t.customReminderDays ?? 7
+        }
+        colorTag = t.colorTag
+        recurrenceRule = t.recurrenceRule
+        tagsRaw = EventTagsParser.displayString(from: t.defaultTags)
+    }
+
     private func save() {
+        let parsedTags = EventTagsParser.parse(tagsRaw)
         let event = Event(
             id: UUID(),
             title: trimmedTitle,
@@ -143,9 +201,13 @@ struct AddEventView: View {
             isFavorite: isFavorite,
             createdAt: Date(),
             colorTag: colorTag,
-            recurrenceRule: recurrenceRule
+            recurrenceRule: recurrenceRule,
+            isSpotlight: pinAsSpotlight,
+            tags: parsedTags,
+            milestoneCheckpointsEnabled: milestoneCheckpointsEnabled
         )
         viewModel.addEvent(event)
+        onFinished?()
         dismiss()
     }
 }

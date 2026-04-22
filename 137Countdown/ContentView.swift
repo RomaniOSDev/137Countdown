@@ -9,6 +9,8 @@ import UserNotifications
 struct ContentView: View {
     @StateObject private var viewModel = CountdownViewModel()
     @State private var selectedTab = 0
+    @AppStorage(CountdownViewModel.firstExperienceCompletedKey) private var firstExperienceCompleted = false
+    @State private var showFirstRunExperience = false
 
     var body: some View {
         ZStack {
@@ -57,6 +59,17 @@ struct ContentView: View {
         .onAppear {
             viewModel.loadFromUserDefaults()
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { _, _ in }
+            if !firstExperienceCompleted && viewModel.events.isEmpty {
+                showFirstRunExperience = true
+            }
+        }
+        .sheet(isPresented: $showFirstRunExperience, onDismiss: {
+            showFirstRunExperience = false
+            if !firstExperienceCompleted && viewModel.events.isEmpty {
+                UserDefaults.standard.set(true, forKey: CountdownViewModel.firstExperienceCompletedKey)
+            }
+        }) {
+            FirstRunExperienceView(viewModel: viewModel)
         }
     }
 }

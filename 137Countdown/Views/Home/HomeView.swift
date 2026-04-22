@@ -30,7 +30,10 @@ struct HomeView: View {
     }
 
     private var spotlightEvent: Event? {
-        viewModel.events
+        if let pinned = viewModel.events.first(where: { $0.isSpotlight && !$0.isPast }) {
+            return pinned
+        }
+        return viewModel.events
             .filter { !$0.isPast }
             .sorted { $0.displayDate < $1.displayDate }
             .first
@@ -48,9 +51,12 @@ struct HomeView: View {
     }
 
     private var upcomingQueue: [Event] {
+        let hero = spotlightEvent
         let sorted = viewModel.events.filter { !$0.isPast }.sorted { $0.displayDate < $1.displayDate }
-        guard let first = sorted.first else { return [] }
-        return Array(sorted.dropFirst().prefix(5))
+        return sorted
+            .filter { $0.id != hero?.id }
+            .prefix(5)
+            .map { $0 }
     }
 
     private var favoriteUpcoming: [Event] {
@@ -161,7 +167,7 @@ struct HomeView: View {
 
                     VStack(alignment: .leading, spacing: 14) {
                         HStack {
-                            Label("Next up", systemImage: "sparkles")
+                            Label(event.isSpotlight ? "Main event" : "Next up", systemImage: event.isSpotlight ? "pin.fill" : "sparkles")
                                 .font(.caption.weight(.semibold))
                                 .foregroundColor(.countdownAccent)
                             Spacer()
