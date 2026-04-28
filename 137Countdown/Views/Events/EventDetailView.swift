@@ -4,48 +4,55 @@
 //
 
 import SwiftUI
+import PhotosUI
+import UIKit
 
 struct EventDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @ObservedObject var viewModel: CountdownViewModel
-
     private let eventId: UUID
 
     @State private var showEditSheet = false
     @State private var showDeleteConfirmation = false
     @State private var showShareSheet = false
     @State private var shareItems: [Any] = []
+    @State private var newStoryNote = ""
+    @State private var showPhotoPicker = false
+    @State private var selectedPhotoItem: PhotosPickerItem?
+    @State private var pendingStoryImageReference: String?
 
     init(viewModel: CountdownViewModel, event: Event) {
         self.viewModel = viewModel
-        self.eventId = event.id
+        eventId = event.id
     }
 
-    private var event: Event? {
-        viewModel.events.first { $0.id == eventId }
+    private var event: Event? { viewModel.events.first { $0.id == eventId } }
+    private var canAddStory: Bool {
+        !newStoryNote.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || pendingStoryImageReference != nil
     }
 
     var body: some View {
         Group {
             if let event {
                 ScrollView {
-                    VStack(spacing: 20) {
-                        header(event)
-                        details(event)
+                    VStack(spacing: 16) {
+                        EventShareCardView(event: event)
+                        moodGoalSection(event)
+                        milestoneTimelineSection(event)
+                        storiesSection(event)
                         shareSection(event)
-                        actions(event)
+                        actionSection(event)
                     }
-                    .padding(.bottom, 28)
+                    .padding(.bottom, 24)
                 }
-                .background(Color.clear)
+                .scrollDismissesKeyboard(.immediately)
                 .navigationTitle(event.title)
                 .navigationBarTitleDisplayMode(.inline)
-                .toolbarBackground(.regularMaterial, for: .navigationBar)
-                .sheet(isPresented: $showEditSheet) {
-                    EditEventView(viewModel: viewModel, event: event)
-                }
-                .sheet(isPresented: $showShareSheet, onDismiss: { shareItems = [] }) {
-                    ActivityShareSheet(items: shareItems)
+                .sheet(isPresented: $showEditSheet) { EditEventView(viewModel: viewModel, event: event) }
+                .sheet(isPresented: $showShareSheet) { ActivityShareSheet(items: shareItems) }
+                .photosPicker(isPresented: $showPhotoPicker, selection: $selectedPhotoItem, matching: .images)
+                .safeAreaInset(edge: .bottom) {
+                    storyComposer
                 }
                 .alert("Delete this event?", isPresented: $showDeleteConfirmation) {
                     Button("Delete", role: .destructive) {
@@ -53,323 +60,238 @@ struct EventDetailView: View {
                         dismiss()
                     }
                     Button("Cancel", role: .cancel) {}
-                } message: {
-                    Text("It will be moved to the archive.")
                 }
             } else {
-                ProgressView()
-                    .onAppear { dismiss() }
+                ProgressView().onAppear { dismiss() }
             }
         }
     }
 
     @ViewBuilder
-    private func header(_ event: Event) -> some View {
-        let accent = event.colorTag == .none ? Color.countdownAccent : event.colorTag.stripeColor
-
-        ZStack {
-            RoundedRectangle(cornerRadius: 28, style: .continuous)
-                .fill(
-                    LinearGradient(
-                        colors: [
-                            accent.opacity(0.14),
-                            Color.white,
-                            Color(red: 0.97, green: 0.98, blue: 1)
-                        ],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: 28, style: .continuous)
-                        .strokeBorder(CountdownVisual.cardStroke, lineWidth: 1)
-                )
-                .shadow(color: Color.black.opacity(0.08), radius: 24, x: 0, y: 14)
-                .shadow(color: accent.opacity(0.12), radius: 20, x: 0, y: 8)
-
-            VStack(spacing: 16) {
-                ZStack {
-                    Circle()
-                        .fill(
-                            RadialGradient(
-                                colors: [accent.opacity(0.35), accent.opacity(0.08)],
-                                center: .center,
-                                startRadius: 4,
-                                endRadius: 48
-                            )
-                        )
-                        .frame(width: 96, height: 96)
-                        .shadow(color: accent.opacity(0.25), radius: 12, y: 4)
-
-                    Image(systemName: event.category.icon)
-                        .foregroundStyle(
-                            LinearGradient(colors: [accent, accent.opacity(0.75)], startPoint: .topLeading, endPoint: .bottomTrailing)
-                        )
-                        .font(.system(size: 52))
-                }
-
-                Text(event.title)
-                    .font(.largeTitle)
-                    .bold()
-                    .foregroundColor(.black)
-                    .multilineTextAlignment(.center)
-
-                Text(event.formattedDateTime)
-                    .font(.headline)
-                    .foregroundColor(.gray)
-
-                if event.isPast {
-                    Text(event.statusText)
-                        .font(.title)
-                        .foregroundColor(.gray)
-                } else if event.isToday {
-                    Text("TODAY!")
-                        .font(.system(size: 48, weight: .bold))
-                        .foregroundStyle(
-                            LinearGradient(colors: [.countdownAccent, Color(red: 1, green: 0.32, blue: 0.05)], startPoint: .leading, endPoint: .trailing)
-                        )
-                        .shadow(color: Color.countdownAccent.opacity(0.25), radius: 8, y: 4)
-                } else {
-                    Text("\(event.daysLeft)")
-                        .font(.system(size: 72, weight: .bold))
-                        .foregroundStyle(
-                            LinearGradient(colors: [.countdownAccent, Color(red: 1, green: 0.3, blue: 0.02)], startPoint: .topLeading, endPoint: .bottomTrailing)
-                        )
-                        .shadow(color: Color.countdownAccent.opacity(0.22), radius: 10, y: 6)
-
-                    Text(event.daysUnitDetail)
-                        .font(.title2)
-                        .foregroundColor(.gray)
-                }
+    private func moodGoalSection(_ event: Event) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Label("Emotion mode", systemImage: event.emotion.symbol).font(.headline)
+            Text("Mood: \(event.emotion.rawValue)")
+            if let goal = event.goal, !goal.isEmpty {
+                Text("Goal: \(goal)")
             }
-            .padding(24)
+            Text(event.statusText).foregroundColor(.secondary)
         }
-        .padding(.horizontal, 4)
+        .padding(16)
+        .countdownRaisedCard(cornerRadius: 16, panel: true)
+        .padding(.horizontal, 16)
     }
 
     @ViewBuilder
-    private func details(_ event: Event) -> some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack {
-                Image(systemName: "paintpalette.fill")
-                    .foregroundStyle(
-                        LinearGradient(colors: [.countdownAccent, .countdownAccent.opacity(0.7)], startPoint: .top, endPoint: .bottom)
-                    )
-                    .frame(width: 24)
-                HStack(spacing: 8) {
-                    Circle()
-                        .fill(event.colorTag == .none ? Color.gray.opacity(0.35) : event.colorTag.stripeColor)
-                        .frame(width: 14, height: 14)
-                        .shadow(color: (event.colorTag == .none ? Color.gray : event.colorTag.stripeColor).opacity(0.35), radius: 3, y: 1)
-                    Text(event.colorTag.displayName)
-                        .foregroundColor(.black)
-                }
-            }
-
-            if event.isSpotlight {
+    private func milestoneTimelineSection(_ event: Event) -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Milestones timeline").font(.headline)
+            ForEach(event.milestoneDays, id: \.self) { day in
+                let reached = event.isPast ? abs(event.daysLeft) >= day : event.daysLeft <= day
                 HStack {
-                    Image(systemName: "pin.fill")
-                        .foregroundColor(.countdownAccent)
-                        .frame(width: 24)
-                    Text("Main event — shown on the Home screen.")
-                        .foregroundColor(.black)
+                    Image(systemName: reached ? "checkmark.seal.fill" : "circle")
+                        .foregroundColor(reached ? .countdownAccent : .secondary)
+                    Text(day == 1 ? "1 day mark" : "\(day) day mark")
+                    Spacer()
+                    Text(reached ? motivationalLine(for: event.emotion) : "Ahead")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
                 }
             }
+        }
+        .padding(16)
+        .countdownRaisedCard(cornerRadius: 16, panel: true)
+        .padding(.horizontal, 16)
+    }
 
-            if event.recurrenceRule != .none {
-                HStack(alignment: .top) {
-                    Image(systemName: "repeat")
-                        .foregroundColor(.countdownAccent)
-                        .frame(width: 24)
+    @ViewBuilder
+    private func storiesSection(_ event: Event) -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Countdown stories").font(.headline)
+            if event.stories.isEmpty {
+                Text("No stories yet. Add notes about your progress.")
+                    .foregroundColor(.secondary)
+            } else {
+                ForEach(event.stories) { story in
                     VStack(alignment: .leading, spacing: 4) {
-                        Text(event.recurrenceRule.displayName)
-                            .foregroundColor(.black)
-                        Text("Anchor: \(DateFormatting.mediumDateTime.string(from: event.date))")
-                            .font(.caption)
-                            .foregroundColor(.gray)
+                        Text(story.date, style: .date).font(.caption).foregroundColor(.secondary)
+                        Text(story.note)
+                        if let imageReference = story.imageReference, !imageReference.isEmpty {
+                            if let image = imageFromLocalReference(imageReference) {
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(height: 160)
+                                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                            } else {
+                                Label("Photo unavailable", systemImage: "photo.slash")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
+                        }
                     }
+                    .padding(.vertical, 4)
                 }
             }
-
-            if let location = event.location, !location.isEmpty {
-                HStack {
-                    Image(systemName: "location.fill")
-                        .foregroundColor(.countdownAccent)
-                        .frame(width: 24)
-                    Text(location)
-                        .foregroundColor(.black)
-                }
-            }
-
-            if let notes = event.notes, !notes.isEmpty {
-                HStack(alignment: .top) {
-                    Image(systemName: "note.text")
-                        .foregroundColor(.countdownAccent)
-                        .frame(width: 24)
-                    Text(notes)
-                        .foregroundColor(.black)
-                }
-            }
-
-            if !event.tags.isEmpty {
-                HStack(alignment: .top) {
-                    Image(systemName: "number")
-                        .foregroundColor(.countdownAccent)
-                        .frame(width: 24)
-                    Text(event.tags.map { "#\($0)" }.joined(separator: " "))
-                        .foregroundColor(.black)
-                }
-            }
-
             HStack {
-                Image(systemName: "bell.fill")
-                    .foregroundColor(.countdownAccent)
-                    .frame(width: 24)
-                Text(event.reminder.rawValue)
-                    .foregroundColor(.black)
+                Text("Use the composer at the bottom to add a story.")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
             }
-
-            HStack(alignment: .top) {
-                Image(systemName: "flag.checkered")
-                    .foregroundColor(.countdownAccent)
-                    .frame(width: 24)
-                Text(
-                    event.milestoneCheckpointsEnabled
-                        ? "Milestones: local alerts at 30, 7, and 1 day before (9:00)."
-                        : "Milestone checkpoints are off."
-                )
-                .font(.subheadline)
-                .foregroundColor(.black)
+            if let pendingStoryImageReference, let preview = imageFromLocalReference(pendingStoryImageReference) {
+                Image(uiImage: preview)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(height: 120)
+                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
             }
         }
-        .padding(18)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .countdownRaisedCard(cornerRadius: 20, panel: true)
-        .padding(.horizontal, 4)
+        .padding(16)
+        .countdownRaisedCard(cornerRadius: 16, panel: true)
+        .padding(.horizontal, 16)
+        .onChange(of: selectedPhotoItem) { _, newValue in
+            print("DEBUG selectedPhotoItem changed hasValue=\(newValue != nil)")
+            guard let newValue else { return }
+            Task { await loadSelectedPhoto(newValue) }
+        }
+        .onChange(of: newStoryNote) { _, newValue in
+            let trimmed = newValue.trimmingCharacters(in: .whitespacesAndNewlines)
+            print("DEBUG newStoryNote changed trimmedCount=\(trimmed.count) canAddStory=\(canAddStory)")
+        }
     }
 
     @ViewBuilder
     private func shareSection(_ event: Event) -> some View {
-        VStack(alignment: .leading, spacing: 14) {
-            Text("Share & export")
-                .font(.headline)
-                .foregroundColor(.black)
-
-            Button {
-                if let img = EventShareImageRenderer.renderPNG(event: event) {
-                    shareItems = [img]
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Share & export").font(.headline)
+            Button("Share countdown card") {
+                if let image = EventShareImageRenderer.renderPNG(event: event) {
+                    shareItems = [image]
                     showShareSheet = true
                 }
-            } label: {
-                Label("Share countdown card (image)", systemImage: "photo.on.rectangle.angled")
-                    .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .tint(.countdownAccent)
-
-            ShareLink(item: sharePlainText(for: event), subject: Text(event.title), message: Text("Shared from The Vibe: Soul Schedule")) {
-                Label("Share as text", systemImage: "text.alignleft")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            }
-            .tint(.countdownAccent)
-
+            ShareLink(item: "“\(event.title)” — \(event.statusText)") { Label("Share as text", systemImage: "text.alignleft") }
             if let url = temporaryICSFileURL(for: event) {
-                ShareLink(item: url, preview: SharePreview("Calendar (.ics)")) {
-                    Label("Export calendar (.ics)", systemImage: "calendar.badge.plus")
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                }
-                .tint(.countdownAccent)
+                ShareLink(item: url) { Label("Export calendar (.ics)", systemImage: "calendar.badge.plus") }
             }
-
-            Button {
-                if event.isSpotlight {
-                    viewModel.setSpotlight(nil)
-                } else {
-                    viewModel.setSpotlight(event)
-                }
-            } label: {
-                Label(
-                    event.isSpotlight ? "Unpin main event" : "Pin as main event",
-                    systemImage: event.isSpotlight ? "pin.slash" : "pin.fill"
-                )
-                .frame(maxWidth: .infinity, alignment: .leading)
-            }
-            .tint(.countdownAccent)
         }
-        .padding(18)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .countdownRaisedCard(cornerRadius: 20, panel: true)
-        .padding(.horizontal, 4)
+        .padding(16)
+        .countdownRaisedCard(cornerRadius: 16, panel: true)
+        .padding(.horizontal, 16)
     }
 
-    private func sharePlainText(for event: Event) -> String {
-        if event.isPast {
-            return "“\(event.title)” — \(event.statusText). (\(event.formattedDateTime))"
+    @ViewBuilder
+    private func actionSection(_ event: Event) -> some View {
+        HStack(spacing: 12) {
+            Button("Edit") { showEditSheet = true }
+                .buttonStyle(.borderedProminent)
+            Button(event.isSpotlight ? "Unpin" : "Pin") {
+                viewModel.setSpotlight(event.isSpotlight ? nil : event)
+            }
+            .buttonStyle(.bordered)
+            Button("Delete", role: .destructive) { showDeleteConfirmation = true }
+                .buttonStyle(.bordered)
         }
-        if event.isToday {
-            return "Today is the day: “\(event.title)”! (\(event.formattedDateTime))"
+        .padding(.horizontal, 16)
+    }
+
+    private func addStory() {
+        print("DEBUG addStory entered")
+        guard let event else { return }
+        let note = newStoryNote.trimmingCharacters(in: .whitespacesAndNewlines)
+        print("DEBUG addStory noteEmpty=\(note.isEmpty) hasImage=\(pendingStoryImageReference != nil)")
+        guard !note.isEmpty || pendingStoryImageReference != nil else { return }
+        var updated = event
+        let finalNote = note.isEmpty ? "Photo update" : note
+        print("DEBUG addStory inserting story finalNote=\(finalNote)")
+        updated.stories.insert(EventStoryEntry(note: finalNote, imageReference: pendingStoryImageReference), at: 0)
+        viewModel.updateEvent(updated)
+        print("DEBUG addStory updateEvent completed")
+        newStoryNote = ""
+        pendingStoryImageReference = nil
+        selectedPhotoItem = nil
+    }
+
+    private var storyComposer: some View {
+        VStack(spacing: 8) {
+            if let pendingStoryImageReference, let preview = imageFromLocalReference(pendingStoryImageReference) {
+                Image(uiImage: preview)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(height: 80)
+                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+            }
+            HStack {
+                TextField("Add story note", text: $newStoryNote)
+                    .textFieldStyle(.roundedBorder)
+                Button {
+                    showPhotoPicker = true
+                } label: {
+                    Image(systemName: pendingStoryImageReference == nil ? "photo.badge.plus" : "checkmark.circle.fill")
+                        .font(.title3)
+                        .foregroundColor(.countdownAccent)
+                }
+                Button {
+                    print("DEBUG Add button action tapped")
+                    print("DEBUG canAddStory=\(canAddStory) noteEmpty=\(newStoryNote.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty) hasImage=\(pendingStoryImageReference != nil)")
+                    dismissKeyboard()
+                    addStory()
+                } label: {
+                    Text("Add")
+                }
+                .buttonStyle(.borderedProminent)
+                .disabled(!canAddStory)
+            }
         }
-        return "“\(event.title)” — \(event.daysLeft) \(event.daysUnitDetail) until \(event.formattedDate)."
+        .padding(.horizontal, 16)
+        .padding(.vertical, 10)
+        .background(.ultraThinMaterial)
+    }
+
+    private func motivationalLine(for mood: EventMood) -> String {
+        switch mood {
+        case .neutral: return "Stay steady"
+        case .excited: return "Keep momentum"
+        case .focused: return "Lock in"
+        case .grateful: return "Appreciate progress"
+        case .ambitious: return "Push forward"
+        }
     }
 
     private func temporaryICSFileURL(for event: Event) -> URL? {
         let ics = EventCalendarExport.icsDocument(for: event)
-        let safe = event.title
-            .replacingOccurrences(of: "/", with: "-")
-            .replacingOccurrences(of: ":", with: "-")
+        let safe = event.title.replacingOccurrences(of: "/", with: "-")
         let url = FileManager.default.temporaryDirectory.appendingPathComponent("\(safe)-countdown.ics")
         guard let data = ics.data(using: .utf8) else { return nil }
+        do { try data.write(to: url, options: .atomic); return url } catch { return nil }
+    }
+
+    private func imageFromLocalReference(_ reference: String) -> UIImage? {
+        UIImage(contentsOfFile: reference)
+    }
+
+    @MainActor
+    private func loadSelectedPhoto(_ item: PhotosPickerItem) async {
         do {
-            try data.write(to: url, options: .atomic)
-            return url
+            guard let data = try await item.loadTransferable(type: Data.self) else { return }
+            pendingStoryImageReference = try saveStoryImageToDisk(data: data)
         } catch {
-            return nil
+            pendingStoryImageReference = nil
         }
     }
 
-    @ViewBuilder
-    private func actions(_ event: Event) -> some View {
-        HStack(spacing: 14) {
-            Button("Edit") {
-                showEditSheet = true
-            }
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 16)
-            .background(
-                RoundedRectangle(cornerRadius: 14, style: .continuous)
-                    .fill(CountdownVisual.primaryButton)
-                    .shadow(color: Color.countdownAccent.opacity(0.4), radius: 12, x: 0, y: 6)
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: 14, style: .continuous)
-                    .strokeBorder(CountdownVisual.primaryButtonStroke, lineWidth: 1)
-            )
-            .foregroundColor(.white)
-            .font(.body.weight(.semibold))
-
-            Button("Delete") {
-                showDeleteConfirmation = true
-            }
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 16)
-            .background(
-                RoundedRectangle(cornerRadius: 14, style: .continuous)
-                    .fill(CountdownVisual.cardFill)
-                    .shadow(color: Color.black.opacity(0.06), radius: 10, x: 0, y: 4)
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: 14, style: .continuous)
-                    .strokeBorder(
-                        LinearGradient(
-                            colors: [Color.countdownAccent.opacity(0.55), Color.countdownAccent.opacity(0.25)],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        ),
-                        lineWidth: 1.5
-                    )
-            )
-            .foregroundColor(.countdownAccent)
-            .font(.body.weight(.semibold))
+    private func saveStoryImageToDisk(data: Data) throws -> String {
+        let folder = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("StoryImages", isDirectory: true)
+        if !FileManager.default.fileExists(atPath: folder.path) {
+            try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
         }
-        .padding(.horizontal, 4)
+        let fileURL = folder.appendingPathComponent("\(UUID().uuidString).img")
+        try data.write(to: fileURL, options: .atomic)
+        return fileURL.path
+    }
+
+    private func dismissKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }

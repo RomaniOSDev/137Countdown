@@ -7,103 +7,107 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		300490962F98D90E00B3ED85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3004908B2F98D90E00B3ED85 /* Assets.xcassets */; };
-		300490982F98D90E00B3ED85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3004908F2F98D90E00B3ED85 /* LaunchScreen.storyboard */; };
-		300490992F98D90E00B3ED85 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 300490912F98D90E00B3ED85 /* Main.storyboard */; };
-		3004909A2F98D90E00B3ED85 /* AppExternalURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300490562F98D90E00B3ED85 /* AppExternalURL.swift */; };
-		3004909B2F98D90E00B3ED85 /* CompletedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300490582F98D90E00B3ED85 /* CompletedEvent.swift */; };
-		3004909C2F98D90E00B3ED85 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300490592F98D90E00B3ED85 /* Event.swift */; };
-		3004909D2F98D90E00B3ED85 /* EventCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004905A2F98D90E00B3ED85 /* EventCategory.swift */; };
-		3004909E2F98D90E00B3ED85 /* EventTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004905B2F98D90E00B3ED85 /* EventTemplate.swift */; };
-		3004909F2F98D90E00B3ED85 /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004905C2F98D90E00B3ED85 /* Quote.swift */; };
-		300490A02F98D90E00B3ED85 /* RecurrenceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004905D2F98D90E00B3ED85 /* RecurrenceRule.swift */; };
-		300490A12F98D90E00B3ED85 /* ReminderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004905E2F98D90E00B3ED85 /* ReminderType.swift */; };
-		300490A22F98D90E00B3ED85 /* CountdownColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300490602F98D90E00B3ED85 /* CountdownColors.swift */; };
-		300490A32F98D90E00B3ED85 /* CountdownVisualStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300490612F98D90E00B3ED85 /* CountdownVisualStyle.swift */; };
-		300490A42F98D90E00B3ED85 /* EventColorTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300490622F98D90E00B3ED85 /* EventColorTag.swift */; };
-		300490A52F98D90E00B3ED85 /* ActivityShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300490642F98D90E00B3ED85 /* ActivityShareSheet.swift */; };
-		300490A62F98D90E00B3ED85 /* DateFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300490652F98D90E00B3ED85 /* DateFormatting.swift */; };
-		300490A72F98D90E00B3ED85 /* EventCalendarExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300490662F98D90E00B3ED85 /* EventCalendarExport.swift */; };
-		300490A82F98D90E00B3ED85 /* EventListQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300490672F98D90E00B3ED85 /* EventListQuery.swift */; };
-		300490A92F98D90E00B3ED85 /* EventOccurrence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300490682F98D90E00B3ED85 /* EventOccurrence.swift */; };
-		300490AA2F98D90E00B3ED85 /* EventTagsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300490692F98D90E00B3ED85 /* EventTagsParser.swift */; };
-		300490AB2F98D90E00B3ED85 /* CountdownViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004906B2F98D90E00B3ED85 /* CountdownViewModel.swift */; };
-		300490AC2F98D90E00B3ED85 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004906D2F98D90E00B3ED85 /* CalendarView.swift */; };
-		300490AD2F98D90E00B3ED85 /* CompletedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004906F2F98D90E00B3ED85 /* CompletedView.swift */; };
-		300490AE2F98D90E00B3ED85 /* CalendarDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300490712F98D90E00B3ED85 /* CalendarDayCell.swift */; };
-		300490AF2F98D90E00B3ED85 /* CompletedEventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300490722F98D90E00B3ED85 /* CompletedEventCard.swift */; };
-		300490B02F98D90E00B3ED85 /* EventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300490732F98D90E00B3ED85 /* EventCard.swift */; };
-		300490B12F98D90E00B3ED85 /* EventRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300490742F98D90E00B3ED85 /* EventRow.swift */; };
-		300490B22F98D90E00B3ED85 /* EventShareCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300490752F98D90E00B3ED85 /* EventShareCardView.swift */; };
-		300490B32F98D90E00B3ED85 /* MiniEventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300490762F98D90E00B3ED85 /* MiniEventCard.swift */; };
-		300490B42F98D90E00B3ED85 /* QuoteCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300490772F98D90E00B3ED85 /* QuoteCard.swift */; };
-		300490B52F98D90E00B3ED85 /* StatCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300490782F98D90E00B3ED85 /* StatCard.swift */; };
-		300490B62F98D90E00B3ED85 /* AddEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004907A2F98D90E00B3ED85 /* AddEventView.swift */; };
-		300490B72F98D90E00B3ED85 /* EditEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004907B2F98D90E00B3ED85 /* EditEventView.swift */; };
-		300490B82F98D90E00B3ED85 /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004907C2F98D90E00B3ED85 /* EventDetailView.swift */; };
-		300490B92F98D90E00B3ED85 /* EventsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004907D2F98D90E00B3ED85 /* EventsListView.swift */; };
-		300490BA2F98D90E00B3ED85 /* EventsTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004907E2F98D90E00B3ED85 /* EventsTimelineView.swift */; };
-		300490BB2F98D90E00B3ED85 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300490802F98D90E00B3ED85 /* HomeView.swift */; };
-		300490BC2F98D90E00B3ED85 /* FirstRunExperienceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300490822F98D90E00B3ED85 /* FirstRunExperienceView.swift */; };
-		300490BD2F98D90E00B3ED85 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300490832F98D90E00B3ED85 /* OnboardingView.swift */; };
-		300490BE2F98D90E00B3ED85 /* QuotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300490852F98D90E00B3ED85 /* QuotesView.swift */; };
-		300490BF2F98D90E00B3ED85 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300490872F98D90E00B3ED85 /* SettingsView.swift */; };
-		300490C02F98D90E00B3ED85 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004908A2F98D90E00B3ED85 /* AppDelegate.swift */; };
-		300490C12F98D90E00B3ED85 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3004908C2F98D90E00B3ED85 /* ContentView.swift */; };
-		300490C22F98D90E00B3ED85 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300490922F98D90E00B3ED85 /* RootView.swift */; };
-		300490C32F98D90E00B3ED85 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300490932F98D90E00B3ED85 /* SceneDelegate.swift */; };
-		300490C42F98D90E00B3ED85 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300490942F98D90E00B3ED85 /* ViewController.swift */; };
+		30D2865E2FA0F320008D5BDC /* AppExternalURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D2861B2FA0F320008D5BDC /* AppExternalURL.swift */; };
+		30D2865F2FA0F320008D5BDC /* CompletedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D2861D2FA0F320008D5BDC /* CompletedEvent.swift */; };
+		30D286602FA0F320008D5BDC /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D2861E2FA0F320008D5BDC /* Event.swift */; };
+		30D286612FA0F320008D5BDC /* EventCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D2861F2FA0F320008D5BDC /* EventCategory.swift */; };
+		30D286622FA0F320008D5BDC /* EventExperience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D286202FA0F320008D5BDC /* EventExperience.swift */; };
+		30D286632FA0F320008D5BDC /* EventTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D286212FA0F320008D5BDC /* EventTemplate.swift */; };
+		30D286642FA0F320008D5BDC /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D286222FA0F320008D5BDC /* Quote.swift */; };
+		30D286652FA0F320008D5BDC /* RecurrenceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D286232FA0F320008D5BDC /* RecurrenceRule.swift */; };
+		30D286662FA0F320008D5BDC /* ReminderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D286242FA0F320008D5BDC /* ReminderType.swift */; };
+		30D286672FA0F320008D5BDC /* CountdownColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D286262FA0F320008D5BDC /* CountdownColors.swift */; };
+		30D286682FA0F320008D5BDC /* CountdownVisualStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D286272FA0F320008D5BDC /* CountdownVisualStyle.swift */; };
+		30D286692FA0F320008D5BDC /* EventColorTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D286282FA0F320008D5BDC /* EventColorTag.swift */; };
+		30D2866A2FA0F320008D5BDC /* ActivityShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D2862A2FA0F320008D5BDC /* ActivityShareSheet.swift */; };
+		30D2866B2FA0F320008D5BDC /* DateFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D2862B2FA0F320008D5BDC /* DateFormatting.swift */; };
+		30D2866C2FA0F320008D5BDC /* EventCalendarExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D2862C2FA0F320008D5BDC /* EventCalendarExport.swift */; };
+		30D2866D2FA0F320008D5BDC /* EventListQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D2862D2FA0F320008D5BDC /* EventListQuery.swift */; };
+		30D2866E2FA0F320008D5BDC /* EventOccurrence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D2862E2FA0F320008D5BDC /* EventOccurrence.swift */; };
+		30D2866F2FA0F320008D5BDC /* EventTagsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D2862F2FA0F320008D5BDC /* EventTagsParser.swift */; };
+		30D286702FA0F320008D5BDC /* CountdownViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D286312FA0F320008D5BDC /* CountdownViewModel.swift */; };
+		30D286712FA0F320008D5BDC /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D286332FA0F320008D5BDC /* CalendarView.swift */; };
+		30D286722FA0F320008D5BDC /* CompletedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D286352FA0F320008D5BDC /* CompletedView.swift */; };
+		30D286732FA0F320008D5BDC /* CalendarDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D286372FA0F320008D5BDC /* CalendarDayCell.swift */; };
+		30D286742FA0F320008D5BDC /* CompletedEventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D286382FA0F320008D5BDC /* CompletedEventCard.swift */; };
+		30D286752FA0F320008D5BDC /* EventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D286392FA0F320008D5BDC /* EventCard.swift */; };
+		30D286762FA0F320008D5BDC /* EventRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D2863A2FA0F320008D5BDC /* EventRow.swift */; };
+		30D286772FA0F320008D5BDC /* EventShareCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D2863B2FA0F320008D5BDC /* EventShareCardView.swift */; };
+		30D286782FA0F320008D5BDC /* MiniEventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D2863C2FA0F320008D5BDC /* MiniEventCard.swift */; };
+		30D286792FA0F320008D5BDC /* QuoteCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D2863D2FA0F320008D5BDC /* QuoteCard.swift */; };
+		30D2867A2FA0F320008D5BDC /* StatCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D2863E2FA0F320008D5BDC /* StatCard.swift */; };
+		30D2867B2FA0F320008D5BDC /* AddEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D286402FA0F320008D5BDC /* AddEventView.swift */; };
+		30D2867C2FA0F320008D5BDC /* EditEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D286412FA0F320008D5BDC /* EditEventView.swift */; };
+		30D2867D2FA0F320008D5BDC /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D286422FA0F320008D5BDC /* EventDetailView.swift */; };
+		30D2867E2FA0F320008D5BDC /* EventsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D286432FA0F320008D5BDC /* EventsListView.swift */; };
+		30D2867F2FA0F320008D5BDC /* EventsTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D286442FA0F320008D5BDC /* EventsTimelineView.swift */; };
+		30D286802FA0F320008D5BDC /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D286462FA0F320008D5BDC /* HomeView.swift */; };
+		30D286812FA0F320008D5BDC /* InsightsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D286482FA0F320008D5BDC /* InsightsView.swift */; };
+		30D286822FA0F320008D5BDC /* FirstRunExperienceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D2864A2FA0F320008D5BDC /* FirstRunExperienceView.swift */; };
+		30D286832FA0F320008D5BDC /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D2864B2FA0F320008D5BDC /* OnboardingView.swift */; };
+		30D286842FA0F320008D5BDC /* QuotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D2864D2FA0F320008D5BDC /* QuotesView.swift */; };
+		30D286852FA0F320008D5BDC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D2864F2FA0F320008D5BDC /* SettingsView.swift */; };
+		30D286862FA0F320008D5BDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D286522FA0F320008D5BDC /* AppDelegate.swift */; };
+		30D286872FA0F320008D5BDC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D286542FA0F320008D5BDC /* ContentView.swift */; };
+		30D286882FA0F320008D5BDC /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D2865A2FA0F320008D5BDC /* RootView.swift */; };
+		30D286892FA0F320008D5BDC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D2865B2FA0F320008D5BDC /* SceneDelegate.swift */; };
+		30D2868A2FA0F320008D5BDC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D2865C2FA0F320008D5BDC /* ViewController.swift */; };
+		30D2868B2FA0F320008D5BDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30D286532FA0F320008D5BDC /* Assets.xcassets */; };
+		30D2868D2FA0F320008D5BDC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30D286572FA0F320008D5BDC /* LaunchScreen.storyboard */; };
+		30D2868E2FA0F320008D5BDC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30D286592FA0F320008D5BDC /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		300490562F98D90E00B3ED85 /* AppExternalURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppExternalURL.swift; sourceTree = "<group>"; };
-		300490582F98D90E00B3ED85 /* CompletedEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedEvent.swift; sourceTree = "<group>"; };
-		300490592F98D90E00B3ED85 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
-		3004905A2F98D90E00B3ED85 /* EventCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCategory.swift; sourceTree = "<group>"; };
-		3004905B2F98D90E00B3ED85 /* EventTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTemplate.swift; sourceTree = "<group>"; };
-		3004905C2F98D90E00B3ED85 /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
-		3004905D2F98D90E00B3ED85 /* RecurrenceRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurrenceRule.swift; sourceTree = "<group>"; };
-		3004905E2F98D90E00B3ED85 /* ReminderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderType.swift; sourceTree = "<group>"; };
-		300490602F98D90E00B3ED85 /* CountdownColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownColors.swift; sourceTree = "<group>"; };
-		300490612F98D90E00B3ED85 /* CountdownVisualStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownVisualStyle.swift; sourceTree = "<group>"; };
-		300490622F98D90E00B3ED85 /* EventColorTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventColorTag.swift; sourceTree = "<group>"; };
-		300490642F98D90E00B3ED85 /* ActivityShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityShareSheet.swift; sourceTree = "<group>"; };
-		300490652F98D90E00B3ED85 /* DateFormatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatting.swift; sourceTree = "<group>"; };
-		300490662F98D90E00B3ED85 /* EventCalendarExport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCalendarExport.swift; sourceTree = "<group>"; };
-		300490672F98D90E00B3ED85 /* EventListQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListQuery.swift; sourceTree = "<group>"; };
-		300490682F98D90E00B3ED85 /* EventOccurrence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventOccurrence.swift; sourceTree = "<group>"; };
-		300490692F98D90E00B3ED85 /* EventTagsParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTagsParser.swift; sourceTree = "<group>"; };
-		3004906B2F98D90E00B3ED85 /* CountdownViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownViewModel.swift; sourceTree = "<group>"; };
-		3004906D2F98D90E00B3ED85 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
-		3004906F2F98D90E00B3ED85 /* CompletedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedView.swift; sourceTree = "<group>"; };
-		300490712F98D90E00B3ED85 /* CalendarDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDayCell.swift; sourceTree = "<group>"; };
-		300490722F98D90E00B3ED85 /* CompletedEventCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedEventCard.swift; sourceTree = "<group>"; };
-		300490732F98D90E00B3ED85 /* EventCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCard.swift; sourceTree = "<group>"; };
-		300490742F98D90E00B3ED85 /* EventRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRow.swift; sourceTree = "<group>"; };
-		300490752F98D90E00B3ED85 /* EventShareCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventShareCardView.swift; sourceTree = "<group>"; };
-		300490762F98D90E00B3ED85 /* MiniEventCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniEventCard.swift; sourceTree = "<group>"; };
-		300490772F98D90E00B3ED85 /* QuoteCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteCard.swift; sourceTree = "<group>"; };
-		300490782F98D90E00B3ED85 /* StatCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatCard.swift; sourceTree = "<group>"; };
-		3004907A2F98D90E00B3ED85 /* AddEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventView.swift; sourceTree = "<group>"; };
-		3004907B2F98D90E00B3ED85 /* EditEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEventView.swift; sourceTree = "<group>"; };
-		3004907C2F98D90E00B3ED85 /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
-		3004907D2F98D90E00B3ED85 /* EventsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListView.swift; sourceTree = "<group>"; };
-		3004907E2F98D90E00B3ED85 /* EventsTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTimelineView.swift; sourceTree = "<group>"; };
-		300490802F98D90E00B3ED85 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		300490822F98D90E00B3ED85 /* FirstRunExperienceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstRunExperienceView.swift; sourceTree = "<group>"; };
-		300490832F98D90E00B3ED85 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
-		300490852F98D90E00B3ED85 /* QuotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesView.swift; sourceTree = "<group>"; };
-		300490872F98D90E00B3ED85 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		3004908A2F98D90E00B3ED85 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3004908B2F98D90E00B3ED85 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3004908C2F98D90E00B3ED85 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		3004908D2F98D90E00B3ED85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3004908E2F98D90E00B3ED85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		300490902F98D90E00B3ED85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		300490922F98D90E00B3ED85 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
-		300490932F98D90E00B3ED85 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		300490942F98D90E00B3ED85 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		30543C602F917C96000323B9 /* 137Countdown.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 137Countdown.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		30D2861B2FA0F320008D5BDC /* AppExternalURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppExternalURL.swift; sourceTree = "<group>"; };
+		30D2861D2FA0F320008D5BDC /* CompletedEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedEvent.swift; sourceTree = "<group>"; };
+		30D2861E2FA0F320008D5BDC /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		30D2861F2FA0F320008D5BDC /* EventCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCategory.swift; sourceTree = "<group>"; };
+		30D286202FA0F320008D5BDC /* EventExperience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventExperience.swift; sourceTree = "<group>"; };
+		30D286212FA0F320008D5BDC /* EventTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTemplate.swift; sourceTree = "<group>"; };
+		30D286222FA0F320008D5BDC /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
+		30D286232FA0F320008D5BDC /* RecurrenceRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurrenceRule.swift; sourceTree = "<group>"; };
+		30D286242FA0F320008D5BDC /* ReminderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderType.swift; sourceTree = "<group>"; };
+		30D286262FA0F320008D5BDC /* CountdownColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownColors.swift; sourceTree = "<group>"; };
+		30D286272FA0F320008D5BDC /* CountdownVisualStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownVisualStyle.swift; sourceTree = "<group>"; };
+		30D286282FA0F320008D5BDC /* EventColorTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventColorTag.swift; sourceTree = "<group>"; };
+		30D2862A2FA0F320008D5BDC /* ActivityShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityShareSheet.swift; sourceTree = "<group>"; };
+		30D2862B2FA0F320008D5BDC /* DateFormatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatting.swift; sourceTree = "<group>"; };
+		30D2862C2FA0F320008D5BDC /* EventCalendarExport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCalendarExport.swift; sourceTree = "<group>"; };
+		30D2862D2FA0F320008D5BDC /* EventListQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListQuery.swift; sourceTree = "<group>"; };
+		30D2862E2FA0F320008D5BDC /* EventOccurrence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventOccurrence.swift; sourceTree = "<group>"; };
+		30D2862F2FA0F320008D5BDC /* EventTagsParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTagsParser.swift; sourceTree = "<group>"; };
+		30D286312FA0F320008D5BDC /* CountdownViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownViewModel.swift; sourceTree = "<group>"; };
+		30D286332FA0F320008D5BDC /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		30D286352FA0F320008D5BDC /* CompletedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedView.swift; sourceTree = "<group>"; };
+		30D286372FA0F320008D5BDC /* CalendarDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDayCell.swift; sourceTree = "<group>"; };
+		30D286382FA0F320008D5BDC /* CompletedEventCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedEventCard.swift; sourceTree = "<group>"; };
+		30D286392FA0F320008D5BDC /* EventCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCard.swift; sourceTree = "<group>"; };
+		30D2863A2FA0F320008D5BDC /* EventRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRow.swift; sourceTree = "<group>"; };
+		30D2863B2FA0F320008D5BDC /* EventShareCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventShareCardView.swift; sourceTree = "<group>"; };
+		30D2863C2FA0F320008D5BDC /* MiniEventCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniEventCard.swift; sourceTree = "<group>"; };
+		30D2863D2FA0F320008D5BDC /* QuoteCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteCard.swift; sourceTree = "<group>"; };
+		30D2863E2FA0F320008D5BDC /* StatCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatCard.swift; sourceTree = "<group>"; };
+		30D286402FA0F320008D5BDC /* AddEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventView.swift; sourceTree = "<group>"; };
+		30D286412FA0F320008D5BDC /* EditEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEventView.swift; sourceTree = "<group>"; };
+		30D286422FA0F320008D5BDC /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
+		30D286432FA0F320008D5BDC /* EventsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListView.swift; sourceTree = "<group>"; };
+		30D286442FA0F320008D5BDC /* EventsTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTimelineView.swift; sourceTree = "<group>"; };
+		30D286462FA0F320008D5BDC /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		30D286482FA0F320008D5BDC /* InsightsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightsView.swift; sourceTree = "<group>"; };
+		30D2864A2FA0F320008D5BDC /* FirstRunExperienceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstRunExperienceView.swift; sourceTree = "<group>"; };
+		30D2864B2FA0F320008D5BDC /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		30D2864D2FA0F320008D5BDC /* QuotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesView.swift; sourceTree = "<group>"; };
+		30D2864F2FA0F320008D5BDC /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		30D286522FA0F320008D5BDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		30D286532FA0F320008D5BDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		30D286542FA0F320008D5BDC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		30D286552FA0F320008D5BDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		30D286562FA0F320008D5BDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		30D286582FA0F320008D5BDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		30D2865A2FA0F320008D5BDC /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		30D2865B2FA0F320008D5BDC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		30D2865C2FA0F320008D5BDC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		565E7D4AD1D3061E8C00A9B9 /* Pods-137Countdown.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-137Countdown.release.xcconfig"; path = "Target Support Files/Pods-137Countdown/Pods-137Countdown.release.xcconfig"; sourceTree = "<group>"; };
 		AB177E12DEFC0421E4F8D697 /* Pods_137Countdown.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_137Countdown.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E09E370ED06FEC82DF62DFB9 /* Pods-137Countdown.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-137Countdown.debug.xcconfig"; path = "Target Support Files/Pods-137Countdown/Pods-137Countdown.debug.xcconfig"; sourceTree = "<group>"; };
@@ -128,172 +132,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		300490572F98D90E00B3ED85 /* Configuration */ = {
-			isa = PBXGroup;
-			children = (
-				300490562F98D90E00B3ED85 /* AppExternalURL.swift */,
-			);
-			path = Configuration;
-			sourceTree = "<group>";
-		};
-		3004905F2F98D90E00B3ED85 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				300490582F98D90E00B3ED85 /* CompletedEvent.swift */,
-				300490592F98D90E00B3ED85 /* Event.swift */,
-				3004905A2F98D90E00B3ED85 /* EventCategory.swift */,
-				3004905B2F98D90E00B3ED85 /* EventTemplate.swift */,
-				3004905C2F98D90E00B3ED85 /* Quote.swift */,
-				3004905D2F98D90E00B3ED85 /* RecurrenceRule.swift */,
-				3004905E2F98D90E00B3ED85 /* ReminderType.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		300490632F98D90E00B3ED85 /* Theme */ = {
-			isa = PBXGroup;
-			children = (
-				300490602F98D90E00B3ED85 /* CountdownColors.swift */,
-				300490612F98D90E00B3ED85 /* CountdownVisualStyle.swift */,
-				300490622F98D90E00B3ED85 /* EventColorTag.swift */,
-			);
-			path = Theme;
-			sourceTree = "<group>";
-		};
-		3004906A2F98D90E00B3ED85 /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				300490642F98D90E00B3ED85 /* ActivityShareSheet.swift */,
-				300490652F98D90E00B3ED85 /* DateFormatting.swift */,
-				300490662F98D90E00B3ED85 /* EventCalendarExport.swift */,
-				300490672F98D90E00B3ED85 /* EventListQuery.swift */,
-				300490682F98D90E00B3ED85 /* EventOccurrence.swift */,
-				300490692F98D90E00B3ED85 /* EventTagsParser.swift */,
-			);
-			path = Utilities;
-			sourceTree = "<group>";
-		};
-		3004906C2F98D90E00B3ED85 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				3004906B2F98D90E00B3ED85 /* CountdownViewModel.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		3004906E2F98D90E00B3ED85 /* Calendar */ = {
-			isa = PBXGroup;
-			children = (
-				3004906D2F98D90E00B3ED85 /* CalendarView.swift */,
-			);
-			path = Calendar;
-			sourceTree = "<group>";
-		};
-		300490702F98D90E00B3ED85 /* Completed */ = {
-			isa = PBXGroup;
-			children = (
-				3004906F2F98D90E00B3ED85 /* CompletedView.swift */,
-			);
-			path = Completed;
-			sourceTree = "<group>";
-		};
-		300490792F98D90E00B3ED85 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				300490712F98D90E00B3ED85 /* CalendarDayCell.swift */,
-				300490722F98D90E00B3ED85 /* CompletedEventCard.swift */,
-				300490732F98D90E00B3ED85 /* EventCard.swift */,
-				300490742F98D90E00B3ED85 /* EventRow.swift */,
-				300490752F98D90E00B3ED85 /* EventShareCardView.swift */,
-				300490762F98D90E00B3ED85 /* MiniEventCard.swift */,
-				300490772F98D90E00B3ED85 /* QuoteCard.swift */,
-				300490782F98D90E00B3ED85 /* StatCard.swift */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
-		3004907F2F98D90E00B3ED85 /* Events */ = {
-			isa = PBXGroup;
-			children = (
-				3004907A2F98D90E00B3ED85 /* AddEventView.swift */,
-				3004907B2F98D90E00B3ED85 /* EditEventView.swift */,
-				3004907C2F98D90E00B3ED85 /* EventDetailView.swift */,
-				3004907D2F98D90E00B3ED85 /* EventsListView.swift */,
-				3004907E2F98D90E00B3ED85 /* EventsTimelineView.swift */,
-			);
-			path = Events;
-			sourceTree = "<group>";
-		};
-		300490812F98D90E00B3ED85 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				300490802F98D90E00B3ED85 /* HomeView.swift */,
-			);
-			path = Home;
-			sourceTree = "<group>";
-		};
-		300490842F98D90E00B3ED85 /* Onboarding */ = {
-			isa = PBXGroup;
-			children = (
-				300490822F98D90E00B3ED85 /* FirstRunExperienceView.swift */,
-				300490832F98D90E00B3ED85 /* OnboardingView.swift */,
-			);
-			path = Onboarding;
-			sourceTree = "<group>";
-		};
-		300490862F98D90E00B3ED85 /* Quotes */ = {
-			isa = PBXGroup;
-			children = (
-				300490852F98D90E00B3ED85 /* QuotesView.swift */,
-			);
-			path = Quotes;
-			sourceTree = "<group>";
-		};
-		300490882F98D90E00B3ED85 /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				300490872F98D90E00B3ED85 /* SettingsView.swift */,
-			);
-			path = Settings;
-			sourceTree = "<group>";
-		};
-		300490892F98D90E00B3ED85 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				3004906E2F98D90E00B3ED85 /* Calendar */,
-				300490702F98D90E00B3ED85 /* Completed */,
-				300490792F98D90E00B3ED85 /* Components */,
-				3004907F2F98D90E00B3ED85 /* Events */,
-				300490812F98D90E00B3ED85 /* Home */,
-				300490842F98D90E00B3ED85 /* Onboarding */,
-				300490862F98D90E00B3ED85 /* Quotes */,
-				300490882F98D90E00B3ED85 /* Settings */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		300490952F98D90E00B3ED85 /* 137Countdown */ = {
-			isa = PBXGroup;
-			children = (
-				300490572F98D90E00B3ED85 /* Configuration */,
-				3004905F2F98D90E00B3ED85 /* Models */,
-				300490632F98D90E00B3ED85 /* Theme */,
-				3004906A2F98D90E00B3ED85 /* Utilities */,
-				3004906C2F98D90E00B3ED85 /* ViewModels */,
-				300490892F98D90E00B3ED85 /* Views */,
-				3004908A2F98D90E00B3ED85 /* AppDelegate.swift */,
-				3004908B2F98D90E00B3ED85 /* Assets.xcassets */,
-				3004908C2F98D90E00B3ED85 /* ContentView.swift */,
-				3004908D2F98D90E00B3ED85 /* Info.plist */,
-				3004908F2F98D90E00B3ED85 /* LaunchScreen.storyboard */,
-				300490912F98D90E00B3ED85 /* Main.storyboard */,
-				300490922F98D90E00B3ED85 /* RootView.swift */,
-				300490932F98D90E00B3ED85 /* SceneDelegate.swift */,
-				300490942F98D90E00B3ED85 /* ViewController.swift */,
-			);
-			path = 137Countdown;
-			sourceTree = "<group>";
-		};
 		3021AB3F79CD858E5A6C1069 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -306,7 +144,7 @@
 		30543C572F917C96000323B9 = {
 			isa = PBXGroup;
 			children = (
-				300490952F98D90E00B3ED85 /* 137Countdown */,
+				30D2865D2FA0F320008D5BDC /* 137Countdown */,
 				30543C612F917C96000323B9 /* Products */,
 				3021AB3F79CD858E5A6C1069 /* Pods */,
 				13572BCE06FDA68ECABD2AFE /* Frameworks */,
@@ -319,6 +157,182 @@
 				30543C602F917C96000323B9 /* 137Countdown.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		30D2861C2FA0F320008D5BDC /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				30D2861B2FA0F320008D5BDC /* AppExternalURL.swift */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		30D286252FA0F320008D5BDC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				30D2861D2FA0F320008D5BDC /* CompletedEvent.swift */,
+				30D2861E2FA0F320008D5BDC /* Event.swift */,
+				30D2861F2FA0F320008D5BDC /* EventCategory.swift */,
+				30D286202FA0F320008D5BDC /* EventExperience.swift */,
+				30D286212FA0F320008D5BDC /* EventTemplate.swift */,
+				30D286222FA0F320008D5BDC /* Quote.swift */,
+				30D286232FA0F320008D5BDC /* RecurrenceRule.swift */,
+				30D286242FA0F320008D5BDC /* ReminderType.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		30D286292FA0F320008D5BDC /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				30D286262FA0F320008D5BDC /* CountdownColors.swift */,
+				30D286272FA0F320008D5BDC /* CountdownVisualStyle.swift */,
+				30D286282FA0F320008D5BDC /* EventColorTag.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		30D286302FA0F320008D5BDC /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				30D2862A2FA0F320008D5BDC /* ActivityShareSheet.swift */,
+				30D2862B2FA0F320008D5BDC /* DateFormatting.swift */,
+				30D2862C2FA0F320008D5BDC /* EventCalendarExport.swift */,
+				30D2862D2FA0F320008D5BDC /* EventListQuery.swift */,
+				30D2862E2FA0F320008D5BDC /* EventOccurrence.swift */,
+				30D2862F2FA0F320008D5BDC /* EventTagsParser.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		30D286322FA0F320008D5BDC /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				30D286312FA0F320008D5BDC /* CountdownViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		30D286342FA0F320008D5BDC /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				30D286332FA0F320008D5BDC /* CalendarView.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		30D286362FA0F320008D5BDC /* Completed */ = {
+			isa = PBXGroup;
+			children = (
+				30D286352FA0F320008D5BDC /* CompletedView.swift */,
+			);
+			path = Completed;
+			sourceTree = "<group>";
+		};
+		30D2863F2FA0F320008D5BDC /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				30D286372FA0F320008D5BDC /* CalendarDayCell.swift */,
+				30D286382FA0F320008D5BDC /* CompletedEventCard.swift */,
+				30D286392FA0F320008D5BDC /* EventCard.swift */,
+				30D2863A2FA0F320008D5BDC /* EventRow.swift */,
+				30D2863B2FA0F320008D5BDC /* EventShareCardView.swift */,
+				30D2863C2FA0F320008D5BDC /* MiniEventCard.swift */,
+				30D2863D2FA0F320008D5BDC /* QuoteCard.swift */,
+				30D2863E2FA0F320008D5BDC /* StatCard.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		30D286452FA0F320008D5BDC /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				30D286402FA0F320008D5BDC /* AddEventView.swift */,
+				30D286412FA0F320008D5BDC /* EditEventView.swift */,
+				30D286422FA0F320008D5BDC /* EventDetailView.swift */,
+				30D286432FA0F320008D5BDC /* EventsListView.swift */,
+				30D286442FA0F320008D5BDC /* EventsTimelineView.swift */,
+			);
+			path = Events;
+			sourceTree = "<group>";
+		};
+		30D286472FA0F320008D5BDC /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				30D286462FA0F320008D5BDC /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		30D286492FA0F320008D5BDC /* Insights */ = {
+			isa = PBXGroup;
+			children = (
+				30D286482FA0F320008D5BDC /* InsightsView.swift */,
+			);
+			path = Insights;
+			sourceTree = "<group>";
+		};
+		30D2864C2FA0F320008D5BDC /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				30D2864A2FA0F320008D5BDC /* FirstRunExperienceView.swift */,
+				30D2864B2FA0F320008D5BDC /* OnboardingView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		30D2864E2FA0F320008D5BDC /* Quotes */ = {
+			isa = PBXGroup;
+			children = (
+				30D2864D2FA0F320008D5BDC /* QuotesView.swift */,
+			);
+			path = Quotes;
+			sourceTree = "<group>";
+		};
+		30D286502FA0F320008D5BDC /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				30D2864F2FA0F320008D5BDC /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		30D286512FA0F320008D5BDC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				30D286342FA0F320008D5BDC /* Calendar */,
+				30D286362FA0F320008D5BDC /* Completed */,
+				30D2863F2FA0F320008D5BDC /* Components */,
+				30D286452FA0F320008D5BDC /* Events */,
+				30D286472FA0F320008D5BDC /* Home */,
+				30D286492FA0F320008D5BDC /* Insights */,
+				30D2864C2FA0F320008D5BDC /* Onboarding */,
+				30D2864E2FA0F320008D5BDC /* Quotes */,
+				30D286502FA0F320008D5BDC /* Settings */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		30D2865D2FA0F320008D5BDC /* 137Countdown */ = {
+			isa = PBXGroup;
+			children = (
+				30D2861C2FA0F320008D5BDC /* Configuration */,
+				30D286252FA0F320008D5BDC /* Models */,
+				30D286292FA0F320008D5BDC /* Theme */,
+				30D286302FA0F320008D5BDC /* Utilities */,
+				30D286322FA0F320008D5BDC /* ViewModels */,
+				30D286512FA0F320008D5BDC /* Views */,
+				30D286522FA0F320008D5BDC /* AppDelegate.swift */,
+				30D286532FA0F320008D5BDC /* Assets.xcassets */,
+				30D286542FA0F320008D5BDC /* ContentView.swift */,
+				30D286552FA0F320008D5BDC /* Info.plist */,
+				30D286572FA0F320008D5BDC /* LaunchScreen.storyboard */,
+				30D286592FA0F320008D5BDC /* Main.storyboard */,
+				30D2865A2FA0F320008D5BDC /* RootView.swift */,
+				30D2865B2FA0F320008D5BDC /* SceneDelegate.swift */,
+				30D2865C2FA0F320008D5BDC /* ViewController.swift */,
+			);
+			path = 137Countdown;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -380,9 +394,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				300490962F98D90E00B3ED85 /* Assets.xcassets in Resources */,
-				300490982F98D90E00B3ED85 /* LaunchScreen.storyboard in Resources */,
-				300490992F98D90E00B3ED85 /* Main.storyboard in Resources */,
+				30D2868B2FA0F320008D5BDC /* Assets.xcassets in Resources */,
+				30D2868D2FA0F320008D5BDC /* LaunchScreen.storyboard in Resources */,
+				30D2868E2FA0F320008D5BDC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,67 +432,69 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3004909A2F98D90E00B3ED85 /* AppExternalURL.swift in Sources */,
-				3004909B2F98D90E00B3ED85 /* CompletedEvent.swift in Sources */,
-				3004909C2F98D90E00B3ED85 /* Event.swift in Sources */,
-				3004909D2F98D90E00B3ED85 /* EventCategory.swift in Sources */,
-				3004909E2F98D90E00B3ED85 /* EventTemplate.swift in Sources */,
-				3004909F2F98D90E00B3ED85 /* Quote.swift in Sources */,
-				300490A02F98D90E00B3ED85 /* RecurrenceRule.swift in Sources */,
-				300490A12F98D90E00B3ED85 /* ReminderType.swift in Sources */,
-				300490A22F98D90E00B3ED85 /* CountdownColors.swift in Sources */,
-				300490A32F98D90E00B3ED85 /* CountdownVisualStyle.swift in Sources */,
-				300490A42F98D90E00B3ED85 /* EventColorTag.swift in Sources */,
-				300490A52F98D90E00B3ED85 /* ActivityShareSheet.swift in Sources */,
-				300490A62F98D90E00B3ED85 /* DateFormatting.swift in Sources */,
-				300490A72F98D90E00B3ED85 /* EventCalendarExport.swift in Sources */,
-				300490A82F98D90E00B3ED85 /* EventListQuery.swift in Sources */,
-				300490A92F98D90E00B3ED85 /* EventOccurrence.swift in Sources */,
-				300490AA2F98D90E00B3ED85 /* EventTagsParser.swift in Sources */,
-				300490AB2F98D90E00B3ED85 /* CountdownViewModel.swift in Sources */,
-				300490AC2F98D90E00B3ED85 /* CalendarView.swift in Sources */,
-				300490AD2F98D90E00B3ED85 /* CompletedView.swift in Sources */,
-				300490AE2F98D90E00B3ED85 /* CalendarDayCell.swift in Sources */,
-				300490AF2F98D90E00B3ED85 /* CompletedEventCard.swift in Sources */,
-				300490B02F98D90E00B3ED85 /* EventCard.swift in Sources */,
-				300490B12F98D90E00B3ED85 /* EventRow.swift in Sources */,
-				300490B22F98D90E00B3ED85 /* EventShareCardView.swift in Sources */,
-				300490B32F98D90E00B3ED85 /* MiniEventCard.swift in Sources */,
-				300490B42F98D90E00B3ED85 /* QuoteCard.swift in Sources */,
-				300490B52F98D90E00B3ED85 /* StatCard.swift in Sources */,
-				300490B62F98D90E00B3ED85 /* AddEventView.swift in Sources */,
-				300490B72F98D90E00B3ED85 /* EditEventView.swift in Sources */,
-				300490B82F98D90E00B3ED85 /* EventDetailView.swift in Sources */,
-				300490B92F98D90E00B3ED85 /* EventsListView.swift in Sources */,
-				300490BA2F98D90E00B3ED85 /* EventsTimelineView.swift in Sources */,
-				300490BB2F98D90E00B3ED85 /* HomeView.swift in Sources */,
-				300490BC2F98D90E00B3ED85 /* FirstRunExperienceView.swift in Sources */,
-				300490BD2F98D90E00B3ED85 /* OnboardingView.swift in Sources */,
-				300490BE2F98D90E00B3ED85 /* QuotesView.swift in Sources */,
-				300490BF2F98D90E00B3ED85 /* SettingsView.swift in Sources */,
-				300490C02F98D90E00B3ED85 /* AppDelegate.swift in Sources */,
-				300490C12F98D90E00B3ED85 /* ContentView.swift in Sources */,
-				300490C22F98D90E00B3ED85 /* RootView.swift in Sources */,
-				300490C32F98D90E00B3ED85 /* SceneDelegate.swift in Sources */,
-				300490C42F98D90E00B3ED85 /* ViewController.swift in Sources */,
+				30D2865E2FA0F320008D5BDC /* AppExternalURL.swift in Sources */,
+				30D2865F2FA0F320008D5BDC /* CompletedEvent.swift in Sources */,
+				30D286602FA0F320008D5BDC /* Event.swift in Sources */,
+				30D286612FA0F320008D5BDC /* EventCategory.swift in Sources */,
+				30D286622FA0F320008D5BDC /* EventExperience.swift in Sources */,
+				30D286632FA0F320008D5BDC /* EventTemplate.swift in Sources */,
+				30D286642FA0F320008D5BDC /* Quote.swift in Sources */,
+				30D286652FA0F320008D5BDC /* RecurrenceRule.swift in Sources */,
+				30D286662FA0F320008D5BDC /* ReminderType.swift in Sources */,
+				30D286672FA0F320008D5BDC /* CountdownColors.swift in Sources */,
+				30D286682FA0F320008D5BDC /* CountdownVisualStyle.swift in Sources */,
+				30D286692FA0F320008D5BDC /* EventColorTag.swift in Sources */,
+				30D2866A2FA0F320008D5BDC /* ActivityShareSheet.swift in Sources */,
+				30D2866B2FA0F320008D5BDC /* DateFormatting.swift in Sources */,
+				30D2866C2FA0F320008D5BDC /* EventCalendarExport.swift in Sources */,
+				30D2866D2FA0F320008D5BDC /* EventListQuery.swift in Sources */,
+				30D2866E2FA0F320008D5BDC /* EventOccurrence.swift in Sources */,
+				30D2866F2FA0F320008D5BDC /* EventTagsParser.swift in Sources */,
+				30D286702FA0F320008D5BDC /* CountdownViewModel.swift in Sources */,
+				30D286712FA0F320008D5BDC /* CalendarView.swift in Sources */,
+				30D286722FA0F320008D5BDC /* CompletedView.swift in Sources */,
+				30D286732FA0F320008D5BDC /* CalendarDayCell.swift in Sources */,
+				30D286742FA0F320008D5BDC /* CompletedEventCard.swift in Sources */,
+				30D286752FA0F320008D5BDC /* EventCard.swift in Sources */,
+				30D286762FA0F320008D5BDC /* EventRow.swift in Sources */,
+				30D286772FA0F320008D5BDC /* EventShareCardView.swift in Sources */,
+				30D286782FA0F320008D5BDC /* MiniEventCard.swift in Sources */,
+				30D286792FA0F320008D5BDC /* QuoteCard.swift in Sources */,
+				30D2867A2FA0F320008D5BDC /* StatCard.swift in Sources */,
+				30D2867B2FA0F320008D5BDC /* AddEventView.swift in Sources */,
+				30D2867C2FA0F320008D5BDC /* EditEventView.swift in Sources */,
+				30D2867D2FA0F320008D5BDC /* EventDetailView.swift in Sources */,
+				30D2867E2FA0F320008D5BDC /* EventsListView.swift in Sources */,
+				30D2867F2FA0F320008D5BDC /* EventsTimelineView.swift in Sources */,
+				30D286802FA0F320008D5BDC /* HomeView.swift in Sources */,
+				30D286812FA0F320008D5BDC /* InsightsView.swift in Sources */,
+				30D286822FA0F320008D5BDC /* FirstRunExperienceView.swift in Sources */,
+				30D286832FA0F320008D5BDC /* OnboardingView.swift in Sources */,
+				30D286842FA0F320008D5BDC /* QuotesView.swift in Sources */,
+				30D286852FA0F320008D5BDC /* SettingsView.swift in Sources */,
+				30D286862FA0F320008D5BDC /* AppDelegate.swift in Sources */,
+				30D286872FA0F320008D5BDC /* ContentView.swift in Sources */,
+				30D286882FA0F320008D5BDC /* RootView.swift in Sources */,
+				30D286892FA0F320008D5BDC /* SceneDelegate.swift in Sources */,
+				30D2868A2FA0F320008D5BDC /* ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		3004908F2F98D90E00B3ED85 /* LaunchScreen.storyboard */ = {
+		30D286572FA0F320008D5BDC /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				3004908E2F98D90E00B3ED85 /* Base */,
+				30D286562FA0F320008D5BDC /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
-		300490912F98D90E00B3ED85 /* Main.storyboard */ = {
+		30D286592FA0F320008D5BDC /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				300490902F98D90E00B3ED85 /* Base */,
+				30D286582FA0F320008D5BDC /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -493,7 +509,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = 137Countdown/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "The Vibe: Soul Schedule";
@@ -501,6 +517,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -529,7 +546,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = 137Countdown/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "The Vibe: Soul Schedule";
@@ -537,6 +554,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

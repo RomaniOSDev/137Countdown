@@ -5,11 +5,19 @@
 
 import Foundation
 
+enum EventTemplatePack: String, CaseIterable, Identifiable {
+    case life = "Life moments"
+    case growth = "Growth goals"
+    case travel = "Travel plans"
+
+    var id: String { rawValue }
+}
+
 struct EventTemplate: Identifiable, Hashable {
     let id: String
+    let pack: EventTemplatePack
     let title: String
     let category: EventCategory
-    /// Days from today for the suggested target date.
     let daysFromNow: Int
     let reminder: ReminderType
     let customReminderDays: Int?
@@ -18,6 +26,10 @@ struct EventTemplate: Identifiable, Hashable {
     let recurrenceRule: RecurrenceRule
     let defaultTags: [String]
     let symbolName: String
+    let defaultMood: EventMood
+    let defaultGoal: String?
+    let defaultMilestones: [Int]
+    let countMode: EventCountMode
 
     var subtitle: String {
         switch daysFromNow {
@@ -32,83 +44,11 @@ struct EventTemplate: Identifiable, Hashable {
     }
 
     static let library: [EventTemplate] = [
-        EventTemplate(
-            id: "trip",
-            title: "Trip",
-            category: .travel,
-            daysFromNow: 14,
-            reminder: .weekBefore,
-            customReminderDays: nil,
-            notes: "Check passport and tickets.",
-            colorTag: .sky,
-            recurrenceRule: .none,
-            defaultTags: ["travel", "plans"],
-            symbolName: "airplane.departure"
-        ),
-        EventTemplate(
-            id: "birthday",
-            title: "Birthday",
-            category: .birthday,
-            daysFromNow: 30,
-            reminder: .weekBefore,
-            customReminderDays: nil,
-            notes: "Gift ideas",
-            colorTag: .lavender,
-            recurrenceRule: .yearly,
-            defaultTags: ["family", "celebration"],
-            symbolName: "gift.fill"
-        ),
-        EventTemplate(
-            id: "exam",
-            title: "Exam day",
-            category: .exam,
-            daysFromNow: 21,
-            reminder: .custom,
-            customReminderDays: 7,
-            notes: "Review chapters 1–5.",
-            colorTag: .none,
-            recurrenceRule: .none,
-            defaultTags: ["study", "school"],
-            symbolName: "book.fill"
-        ),
-        EventTemplate(
-            id: "deadline",
-            title: "Project deadline",
-            category: .deadline,
-            daysFromNow: 7,
-            reminder: .dayBefore,
-            customReminderDays: nil,
-            notes: "Final polish and export.",
-            colorTag: .coral,
-            recurrenceRule: .none,
-            defaultTags: ["work", "urgent"],
-            symbolName: "flag.checkered"
-        ),
-        EventTemplate(
-            id: "vacation",
-            title: "Vacation starts",
-            category: .vacation,
-            daysFromNow: 60,
-            reminder: .monthBefore,
-            customReminderDays: nil,
-            notes: "Pack and confirm hotel.",
-            colorTag: .sky,
-            recurrenceRule: .none,
-            defaultTags: ["rest", "summer"],
-            symbolName: "beach.umbrella.fill"
-        ),
-        EventTemplate(
-            id: "concert",
-            title: "Concert",
-            category: .concert,
-            daysFromNow: 10,
-            reminder: .dayBefore,
-            customReminderDays: nil,
-            notes: "Doors time — arrive early.",
-            colorTag: .lavender,
-            recurrenceRule: .none,
-            defaultTags: ["music", "friends"],
-            symbolName: "music.note"
-        )
+        EventTemplate(id: "birthday", pack: .life, title: "Birthday", category: .birthday, daysFromNow: 30, reminder: .weekBefore, customReminderDays: nil, notes: "Plan gift and dinner.", colorTag: .lavender, recurrenceRule: .yearly, defaultTags: ["family", "celebration"], symbolName: "gift.fill", defaultMood: .grateful, defaultGoal: "Make this day special.", defaultMilestones: [14, 3], countMode: .countdown),
+        EventTemplate(id: "anniversary", pack: .life, title: "Anniversary", category: .holiday, daysFromNow: 60, reminder: .monthBefore, customReminderDays: nil, notes: "Book a place and prepare surprise.", colorTag: .coral, recurrenceRule: .yearly, defaultTags: ["love", "life"], symbolName: "heart.fill", defaultMood: .grateful, defaultGoal: "Create a meaningful memory.", defaultMilestones: [30, 10], countMode: .countdown),
+        EventTemplate(id: "exam", pack: .growth, title: "Exam day", category: .exam, daysFromNow: 21, reminder: .custom, customReminderDays: 7, notes: "Review chapters and solve past papers.", colorTag: .sky, recurrenceRule: .none, defaultTags: ["study"], symbolName: "book.fill", defaultMood: .focused, defaultGoal: "Pass with confidence.", defaultMilestones: [14, 5, 2], countMode: .countdown),
+        EventTemplate(id: "habit", pack: .growth, title: "Habit streak start", category: .other, daysFromNow: 0, reminder: .onDay, customReminderDays: nil, notes: "Track consistency daily.", colorTag: .mint, recurrenceRule: .none, defaultTags: ["habit", "self-growth"], symbolName: "flame.fill", defaultMood: .ambitious, defaultGoal: "Build a 100-day streak.", defaultMilestones: [7, 30, 100], countMode: .countUp),
+        EventTemplate(id: "trip", pack: .travel, title: "Trip", category: .travel, daysFromNow: 14, reminder: .weekBefore, customReminderDays: nil, notes: "Check passport, tickets, and packing list.", colorTag: .sky, recurrenceRule: .none, defaultTags: ["travel"], symbolName: "airplane.departure", defaultMood: .excited, defaultGoal: "Travel stress-free.", defaultMilestones: [10, 3], countMode: .countdown),
+        EventTemplate(id: "vacation", pack: .travel, title: "Vacation starts", category: .vacation, daysFromNow: 45, reminder: .monthBefore, customReminderDays: nil, notes: "Confirm hotel and transport.", colorTag: .lemon, recurrenceRule: .none, defaultTags: ["rest", "summer"], symbolName: "beach.umbrella.fill", defaultMood: .excited, defaultGoal: "Finish prep early.", defaultMilestones: [21, 7], countMode: .countdown)
     ]
 }

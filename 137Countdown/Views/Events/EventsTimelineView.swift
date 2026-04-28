@@ -19,9 +19,15 @@ private enum TimelineRow: Identifiable {
 
 struct EventsTimelineView: View {
     @ObservedObject var viewModel: CountdownViewModel
+    var selectedEventID: Binding<UUID?>? = nil
+    var useNavigationLinks: Bool = true
+    var externalSearchText: Binding<String>? = nil
 
     @State private var categoryFilter: EventCategory?
-    @State private var searchText = ""
+
+    private var effectiveSearchText: String {
+        externalSearchText?.wrappedValue ?? ""
+    }
 
     private var rows: [TimelineRow] {
         let cal = Calendar.current
@@ -49,11 +55,11 @@ struct EventsTimelineView: View {
     }
 
     private func matchesSearch(_ event: Event) -> Bool {
-        viewModel.matchesTimelineSearch(event: event, text: searchText)
+        viewModel.matchesTimelineSearch(event: event, text: effectiveSearchText)
     }
 
     private func matchesCompletedSearch(_ c: CompletedEvent) -> Bool {
-        let t = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        let t = effectiveSearchText.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !t.isEmpty else { return true }
         return c.title.localizedCaseInsensitiveContains(t)
             || (c.notes ?? "").localizedCaseInsensitiveContains(t)
@@ -79,10 +85,24 @@ struct EventsTimelineView: View {
                 ForEach(rows) { row in
                     switch row {
                     case .upcoming(let event):
-                        NavigationLink(value: event) {
-                            TimelineUpcomingRow(event: event)
+                        if useNavigationLinks {
+                            NavigationLink(value: event) {
+                                TimelineUpcomingRow(event: event, isSelected: false)
+                            }
+                            .listRowBackground(Color.clear)
+                        } else {
+                            Button {
+                                selectedEventID?.wrappedValue = event.id
+                            } label: {
+                                TimelineUpcomingRow(event: event, isSelected: selectedEventID?.wrappedValue == event.id)
+                            }
+                            .buttonStyle(.plain)
+                            .listRowBackground(
+                                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                                    .fill((selectedEventID?.wrappedValue == event.id) ? Color.countdownAccent.opacity(0.14) : Color.clear)
+                                    .padding(.vertical, 3)
+                            )
                         }
-                        .listRowBackground(Color.clear)
                     case .completed(let done):
                         VStack(alignment: .leading, spacing: 6) {
                             HStack {
@@ -108,12 +128,13 @@ struct EventsTimelineView: View {
         }
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
-        .searchable(text: $searchText, prompt: "Search title, notes, tags")
+        .scrollDismissesKeyboard(.immediately)
     }
 }
 
 private struct TimelineUpcomingRow: View {
     let event: Event
+    let isSelected: Bool
 
     private var accent: Color {
         event.colorTag == .none ? Color.countdownAccent : event.colorTag.stripeColor
@@ -165,5 +186,6 @@ private struct TimelineUpcomingRow: View {
             }
         }
         .padding(.vertical, 4)
+        .opacity(isSelected ? 1 : 0.98)
     }
 }

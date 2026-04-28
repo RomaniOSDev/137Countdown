@@ -41,17 +41,23 @@ struct ContentView: View {
                 }
                 .tag(3)
 
+            InsightsView(viewModel: viewModel)
+                .tabItem {
+                    Label("Insights", systemImage: "chart.bar.fill")
+                }
+                .tag(4)
+
             CompletedView(viewModel: viewModel)
                 .tabItem {
                     Label("Archive", systemImage: "archivebox.fill")
                 }
-                .tag(4)
+                .tag(5)
 
             SettingsView()
                 .tabItem {
                     Label("Settings", systemImage: "gearshape.fill")
                 }
-                .tag(5)
+                .tag(6)
             }
         }
         .tint(.countdownAccent)

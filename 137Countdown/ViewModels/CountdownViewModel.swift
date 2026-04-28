@@ -53,6 +53,18 @@ final class CountdownViewModel: ObservableObject {
         return quotes[dayOfYear % quotes.count]
     }
 
+    var averageStoriesPerEvent: Double {
+        guard !events.isEmpty else { return 0 }
+        let total = events.reduce(0) { $0 + $1.stories.count }
+        return Double(total) / Double(events.count)
+    }
+
+    var moodDistribution: [(EventMood, Int)] {
+        EventMood.allCases.map { mood in
+            (mood, events.filter { $0.emotion == mood }.count)
+        }
+    }
+
     func upcomingEvents(search: String, scope: EventFilterScope, category: EventCategory?) -> [Event] {
         listEvents(search: search, scope: scope, category: category, sort: .dateAscending)
             .filter { !$0.isPast && !$0.isToday }
@@ -171,7 +183,12 @@ final class CountdownViewModel: ObservableObject {
             recurrenceRule: .none,
             isSpotlight: false,
             tags: [],
-            milestoneCheckpointsEnabled: true
+            milestoneCheckpointsEnabled: true,
+            countMode: .countdown,
+            emotion: .neutral,
+            goal: nil,
+            stories: [],
+            customMilestoneDays: []
         )
         events.append(restoredEvent)
         completedEvents.removeAll { $0.id == completed.id }
@@ -207,7 +224,12 @@ final class CountdownViewModel: ObservableObject {
             recurrenceRule: event.recurrenceRule,
             isSpotlight: false,
             tags: event.tags,
-            milestoneCheckpointsEnabled: event.milestoneCheckpointsEnabled
+            milestoneCheckpointsEnabled: event.milestoneCheckpointsEnabled,
+            countMode: event.countMode,
+            emotion: event.emotion,
+            goal: event.goal,
+            stories: event.stories,
+            customMilestoneDays: event.customMilestoneDays
         )
         events.append(newEvent)
         scheduleAllNotifications(for: newEvent)
@@ -340,9 +362,9 @@ final class CountdownViewModel: ObservableObject {
         UNUserNotificationCenter.current().add(request)
     }
 
-    /// Morning notification (9:00) on milestone days: 30, 7, and 1 calendar day before the event day.
+    /// Morning notification (9:00) on configured milestone days before the event day.
     private func scheduleMilestoneReminders(for event: Event) {
-        guard event.milestoneCheckpointsEnabled else { return }
+        guard !event.milestoneDays.isEmpty else { return }
         let calendar = Calendar.current
         let target = event.displayDate
         guard target > Date() else { return }
@@ -350,7 +372,7 @@ final class CountdownViewModel: ObservableObject {
         let startOfTarget = calendar.startOfDay(for: target)
         let startOfToday = calendar.startOfDay(for: Date())
 
-        for daysBefore in [30, 7, 1] {
+        for daysBefore in event.milestoneDays {
             guard let milestoneDay = calendar.date(byAdding: .day, value: -daysBefore, to: startOfTarget) else { continue }
             if milestoneDay < startOfToday { continue }
 
@@ -443,7 +465,12 @@ final class CountdownViewModel: ObservableObject {
             recurrenceRule: .yearly,
             isSpotlight: true,
             tags: ["holiday", "family"],
-            milestoneCheckpointsEnabled: true
+            milestoneCheckpointsEnabled: true,
+            countMode: .countdown,
+            emotion: .grateful,
+            goal: "Celebrate with close people.",
+            stories: [EventStoryEntry(note: "Booked family dinner.")],
+            customMilestoneDays: [14]
         )
 
         let event2 = Event(
@@ -462,7 +489,12 @@ final class CountdownViewModel: ObservableObject {
             recurrenceRule: .yearly,
             isSpotlight: false,
             tags: ["birthday"],
-            milestoneCheckpointsEnabled: true
+            milestoneCheckpointsEnabled: true,
+            countMode: .countdown,
+            emotion: .excited,
+            goal: "Prepare gifts and dinner.",
+            stories: [],
+            customMilestoneDays: [10, 3]
         )
 
         let event3 = Event(
@@ -481,7 +513,12 @@ final class CountdownViewModel: ObservableObject {
             recurrenceRule: .none,
             isSpotlight: false,
             tags: ["travel"],
-            milestoneCheckpointsEnabled: true
+            milestoneCheckpointsEnabled: true,
+            countMode: .countdown,
+            emotion: .ambitious,
+            goal: "Pack everything three days early.",
+            stories: [EventStoryEntry(note: "Added places to visit.")],
+            customMilestoneDays: [21, 5]
         )
 
         events = [event1, event2, event3]

@@ -110,6 +110,7 @@ struct CountdownRaisedCardModifier: ViewModifier {
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
                     .strokeBorder(CountdownVisual.cardStroke, lineWidth: 1)
+                    .allowsHitTesting(false)
             )
     }
 }

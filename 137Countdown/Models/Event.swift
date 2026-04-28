@@ -25,6 +25,11 @@ struct Event: Identifiable, Hashable {
     var tags: [String]
     /// Schedule milestone notifications at 30, 7, and 1 day before the event (start of target day).
     var milestoneCheckpointsEnabled: Bool
+    var countMode: EventCountMode
+    var emotion: EventMood
+    var goal: String?
+    var stories: [EventStoryEntry]
+    var customMilestoneDays: [Int]
 
     init(
         id: UUID,
@@ -42,7 +47,12 @@ struct Event: Identifiable, Hashable {
         recurrenceRule: RecurrenceRule = .none,
         isSpotlight: Bool = false,
         tags: [String] = [],
-        milestoneCheckpointsEnabled: Bool = true
+        milestoneCheckpointsEnabled: Bool = true,
+        countMode: EventCountMode = .countdown,
+        emotion: EventMood = .neutral,
+        goal: String? = nil,
+        stories: [EventStoryEntry] = [],
+        customMilestoneDays: [Int] = []
     ) {
         self.id = id
         self.title = title
@@ -60,6 +70,11 @@ struct Event: Identifiable, Hashable {
         self.isSpotlight = isSpotlight
         self.tags = tags
         self.milestoneCheckpointsEnabled = milestoneCheckpointsEnabled
+        self.countMode = countMode
+        self.emotion = emotion
+        self.goal = goal
+        self.stories = stories
+        self.customMilestoneDays = customMilestoneDays
     }
 
     /// Next occurrence used for countdown, list dates, and notifications.
@@ -67,7 +82,7 @@ struct Event: Identifiable, Hashable {
         EventOccurrence.nextOccurrence(anchor: date, rule: recurrenceRule, notBefore: Date())
     }
 
-    var daysLeft: Int {
+    private var signedDaysToTarget: Int {
         let calendar = Calendar.current
         let startOfToday = calendar.startOfDay(for: Date())
         let startOfTarget = calendar.startOfDay(for: displayDate)
@@ -75,24 +90,55 @@ struct Event: Identifiable, Hashable {
         return components.day ?? 0
     }
 
+    var daysLeft: Int {
+        switch countMode {
+        case .countdown:
+            return signedDaysToTarget
+        case .countUp:
+            return signedDaysToTarget < 0 ? abs(signedDaysToTarget) : signedDaysToTarget
+        }
+    }
+
     var isPast: Bool {
-        daysLeft < 0
+        signedDaysToTarget < 0
     }
 
     var isToday: Bool {
-        daysLeft == 0
+        signedDaysToTarget == 0
+    }
+
+    var milestoneDays: [Int] {
+        var values = customMilestoneDays.filter { $0 > 0 }
+        if milestoneCheckpointsEnabled {
+            values.append(contentsOf: [30, 7, 1])
+        }
+        return Array(Set(values)).sorted(by: >)
     }
 
     var statusText: String {
-        if isPast {
-            let absDays = abs(daysLeft)
-            if absDays == 1 { return "1 day ago" }
-            return "\(absDays) days ago"
-        } else if isToday {
-            return "Today!"
-        } else {
-            if daysLeft == 1 { return "1 day left" }
-            return "\(daysLeft) days left"
+        switch countMode {
+        case .countdown:
+            if isPast {
+                let absDays = abs(signedDaysToTarget)
+                if absDays == 1 { return "1 day ago" }
+                return "\(absDays) days ago"
+            } else if isToday {
+                return "Today!"
+            } else {
+                if signedDaysToTarget == 1 { return "1 day left" }
+                return "\(signedDaysToTarget) days left"
+            }
+        case .countUp:
+            if isPast {
+                let value = abs(signedDaysToTarget)
+                if value == 1 { return "1 day since" }
+                return "\(value) days since"
+            } else if isToday {
+                return "Starts today"
+            } else {
+                if signedDaysToTarget == 1 { return "Starts in 1 day" }
+                return "Starts in \(signedDaysToTarget) days"
+            }
         }
     }
 
@@ -105,9 +151,17 @@ struct Event: Identifiable, Hashable {
     }
 
     var daysUnitDetail: String {
-        if isPast { return "" }
-        if daysLeft == 1 { return "day" }
-        return "days"
+        switch countMode {
+        case .countdown:
+            if isPast { return "" }
+            if signedDaysToTarget == 1 { return "day" }
+            return "days"
+        case .countUp:
+            if isPast {
+                return abs(signedDaysToTarget) == 1 ? "day since" : "days since"
+            }
+            return signedDaysToTarget == 1 ? "day" : "days"
+        }
     }
 }
 
@@ -116,6 +170,7 @@ extension Event: Codable {
         case id, title, date, category, notes, location, reminder, customReminderDays, imageName, isFavorite, createdAt
         case colorTag, recurrenceRule
         case isSpotlight, tags, milestoneCheckpointsEnabled
+        case countMode, emotion, goal, stories, customMilestoneDays
     }
 
     init(from decoder: Decoder) throws {
@@ -136,6 +191,11 @@ extension Event: Codable {
         isSpotlight = try container.decodeIfPresent(Bool.self, forKey: .isSpotlight) ?? false
         tags = try container.decodeIfPresent([String].self, forKey: .tags) ?? []
         milestoneCheckpointsEnabled = try container.decodeIfPresent(Bool.self, forKey: .milestoneCheckpointsEnabled) ?? true
+        countMode = try container.decodeIfPresent(EventCountMode.self, forKey: .countMode) ?? .countdown
+        emotion = try container.decodeIfPresent(EventMood.self, forKey: .emotion) ?? .neutral
+        goal = try container.decodeIfPresent(String.self, forKey: .goal)
+        stories = try container.decodeIfPresent([EventStoryEntry].self, forKey: .stories) ?? []
+        customMilestoneDays = try container.decodeIfPresent([Int].self, forKey: .customMilestoneDays) ?? []
     }
 
     func encode(to encoder: Encoder) throws {
@@ -156,5 +216,10 @@ extension Event: Codable {
         try container.encode(isSpotlight, forKey: .isSpotlight)
         try container.encode(tags, forKey: .tags)
         try container.encode(milestoneCheckpointsEnabled, forKey: .milestoneCheckpointsEnabled)
+        try container.encode(countMode, forKey: .countMode)
+        try container.encode(emotion, forKey: .emotion)
+        try container.encodeIfPresent(goal, forKey: .goal)
+        try container.encode(stories, forKey: .stories)
+        try container.encode(customMilestoneDays, forKey: .customMilestoneDays)
     }
 }

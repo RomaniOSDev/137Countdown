@@ -10,7 +10,6 @@ struct EditEventView: View {
     @ObservedObject var viewModel: CountdownViewModel
 
     private let eventId: UUID
-
     @State private var title = ""
     @State private var date = Date()
     @State private var category: EventCategory = .other
@@ -24,10 +23,14 @@ struct EditEventView: View {
     @State private var tagsRaw = ""
     @State private var milestoneCheckpointsEnabled = true
     @State private var pinAsSpotlight = false
+    @State private var countMode: EventCountMode = .countdown
+    @State private var emotion: EventMood = .neutral
+    @State private var goal = ""
+    @State private var customMilestonesRaw = ""
 
     init(viewModel: CountdownViewModel, event: Event) {
         self.viewModel = viewModel
-        self.eventId = event.id
+        eventId = event.id
         _title = State(initialValue: event.title)
         _date = State(initialValue: event.date)
         _category = State(initialValue: event.category)
@@ -41,125 +44,80 @@ struct EditEventView: View {
         _tagsRaw = State(initialValue: EventTagsParser.displayString(from: event.tags))
         _milestoneCheckpointsEnabled = State(initialValue: event.milestoneCheckpointsEnabled)
         _pinAsSpotlight = State(initialValue: event.isSpotlight)
+        _countMode = State(initialValue: event.countMode)
+        _emotion = State(initialValue: event.emotion)
+        _goal = State(initialValue: event.goal ?? "")
+        _customMilestonesRaw = State(initialValue: event.customMilestoneDays.map(String.init).joined(separator: ","))
     }
 
-    private var trimmedTitle: String {
-        title.trimmingCharacters(in: .whitespacesAndNewlines)
-    }
+    private var trimmedTitle: String { title.trimmingCharacters(in: .whitespacesAndNewlines) }
 
     var body: some View {
         NavigationStack {
-            ZStack {
-                CountdownScreenBackground()
-
-                Form {
-                    Section {
-                        TextField("Event title", text: $title)
-                            .foregroundColor(.black)
-                            .tint(.countdownAccent)
-
-                        DatePicker("Date & time", selection: $date, displayedComponents: [.date, .hourAndMinute])
-                            .tint(.countdownAccent)
-
-                        Picker("Category", selection: $category) {
-                            ForEach(EventCategory.allCases, id: \.self) { cat in
-                                Label(cat.rawValue, systemImage: cat.icon).tag(cat)
-                            }
-                        }
-                        .tint(.countdownAccent)
-                    }
-
-                    Section(header: Text("Tags").foregroundColor(.gray)) {
-                        TextField("Comma-separated", text: $tagsRaw)
-                            .foregroundColor(.black)
-                            .tint(.countdownAccent)
-                    }
-
-                    Section(header: Text("Color tag").foregroundColor(.gray)) {
-                        Picker("Tag color", selection: $colorTag) {
-                            ForEach(EventColorTag.allCases, id: \.self) { tag in
-                                HStack {
-                                    Circle()
-                                        .fill(tag == .none ? Color.countdownAccent : tag.stripeColor)
-                                        .frame(width: 12, height: 12)
-                                    Text(tag.displayName)
-                                }
-                                .tag(tag)
-                            }
-                        }
-                        .tint(.countdownAccent)
-                    }
-
-                    Section(header: Text("Repeat").foregroundColor(.gray)) {
-                        Picker("Recurrence", selection: $recurrenceRule) {
-                            ForEach(RecurrenceRule.allCases, id: \.self) { rule in
-                                Text(rule.displayName).tag(rule)
-                            }
-                        }
-                        .tint(.countdownAccent)
-                    }
-
-                    Section(header: Text("Details").foregroundColor(.gray)) {
-                        TextField("Location", text: $location)
-                            .foregroundColor(.black)
-                            .tint(.countdownAccent)
-
-                        TextEditor(text: $notes)
-                            .frame(height: 80)
-                            .foregroundColor(.black)
-                            .tint(.countdownAccent)
-                    }
-
-                    Section(header: Text("Reminder").foregroundColor(.gray)) {
-                        Picker("Remind me", selection: $reminderType) {
-                            ForEach(ReminderType.allCases, id: \.self) { type in
-                                Text(type.rawValue).tag(type)
-                            }
-                        }
-                        .tint(.countdownAccent)
-
-                        if reminderType == .custom {
-                            HStack {
-                                Text("Days before")
-                                Spacer()
-                                Stepper("\(customReminderDays)", value: $customReminderDays, in: 1 ... 365)
-                                    .tint(.countdownAccent)
-                            }
+            Form {
+                Section {
+                    TextField("Event title", text: $title)
+                    DatePicker("Date & time", selection: $date, displayedComponents: [.date, .hourAndMinute])
+                    Picker("Count mode", selection: $countMode) {
+                        ForEach(EventCountMode.allCases) { mode in
+                            Text(mode.rawValue).tag(mode)
                         }
                     }
-
-                    Section(header: Text("Milestones").foregroundColor(.gray)) {
-                        Toggle("30 / 7 / 1 day checkpoints", isOn: $milestoneCheckpointsEnabled)
-                            .tint(.countdownAccent)
-                    }
-
-                    Section {
-                        Toggle("Add to favorites", isOn: $isFavorite)
-                            .tint(.countdownAccent)
-                        Toggle("Pin as main event on Home", isOn: $pinAsSpotlight)
-                            .tint(.countdownAccent)
+                    Picker("Category", selection: $category) {
+                        ForEach(EventCategory.allCases, id: \.self) { cat in
+                            Label(cat.rawValue, systemImage: cat.icon).tag(cat)
+                        }
                     }
                 }
-                .foregroundColor(.black)
-                .scrollContentBackground(.hidden)
+                Section("Emotion mode") {
+                    Picker("Mood", selection: $emotion) {
+                        ForEach(EventMood.allCases) { mood in
+                            Label(mood.rawValue, systemImage: mood.symbol).tag(mood)
+                        }
+                    }
+                    TextField("Goal", text: $goal, axis: .vertical)
+                }
+                Section("Tags & milestones") {
+                    TextField("Tags (comma-separated)", text: $tagsRaw)
+                    Toggle("Enable 30 / 7 / 1 milestones", isOn: $milestoneCheckpointsEnabled)
+                    TextField("Custom milestones in days", text: $customMilestonesRaw)
+                }
+                Section("Details") {
+                    TextField("Location", text: $location)
+                    TextEditor(text: $notes).frame(height: 90)
+                }
+                Section("Reminder") {
+                    Picker("Remind me", selection: $reminderType) {
+                        ForEach(ReminderType.allCases, id: \.self) { type in
+                            Text(type.rawValue).tag(type)
+                        }
+                    }
+                    if reminderType == .custom {
+                        Stepper("Days before: \(customReminderDays)", value: $customReminderDays, in: 1 ... 365)
+                    }
+                }
+                Section("Appearance") {
+                    Picker("Color tag", selection: $colorTag) {
+                        ForEach(EventColorTag.allCases, id: \.self) { tag in
+                            Text(tag.displayName).tag(tag)
+                        }
+                    }
+                    Picker("Recurrence", selection: $recurrenceRule) {
+                        ForEach(RecurrenceRule.allCases, id: \.self) { rule in
+                            Text(rule.displayName).tag(rule)
+                        }
+                    }
+                }
+                Section {
+                    Toggle("Add to favorites", isOn: $isFavorite)
+                    Toggle("Pin as main event on Home", isOn: $pinAsSpotlight)
+                }
             }
             .navigationTitle("Edit event")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbarBackground(.regularMaterial, for: .navigationBar)
             .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
-                        dismiss()
-                    }
-                    .foregroundColor(.countdownAccent)
-                }
+                ToolbarItem(placement: .cancellationAction) { Button("Cancel") { dismiss() } }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") {
-                        save()
-                    }
-                    .fontWeight(.semibold)
-                    .foregroundColor(trimmedTitle.isEmpty ? .gray : .countdownAccent)
-                    .disabled(trimmedTitle.isEmpty)
+                    Button("Save") { save() }.disabled(trimmedTitle.isEmpty)
                 }
             }
         }
@@ -170,7 +128,6 @@ struct EditEventView: View {
             dismiss()
             return
         }
-        let parsedTags = EventTagsParser.parse(tagsRaw)
         let updated = Event(
             id: existing.id,
             title: trimmedTitle,
@@ -186,8 +143,16 @@ struct EditEventView: View {
             colorTag: colorTag,
             recurrenceRule: recurrenceRule,
             isSpotlight: pinAsSpotlight,
-            tags: parsedTags,
-            milestoneCheckpointsEnabled: milestoneCheckpointsEnabled
+            tags: EventTagsParser.parse(tagsRaw),
+            milestoneCheckpointsEnabled: milestoneCheckpointsEnabled,
+            countMode: countMode,
+            emotion: emotion,
+            goal: goal.isEmpty ? nil : goal,
+            stories: existing.stories,
+            customMilestoneDays: customMilestonesRaw
+                .split(separator: ",")
+                .compactMap { Int($0.trimmingCharacters(in: .whitespaces)) }
+                .filter { $0 > 0 }
         )
         viewModel.updateEvent(updated)
         dismiss()
