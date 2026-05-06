@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		302044FF2FAB1B7800A1DCA4 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302044F92FAB1B7800A1DCA4 /* AppRouter.swift */; };
+		302045002FAB1B7800A1DCA4 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302044FA2FAB1B7800A1DCA4 /* PersistenceManager.swift */; };
+		302045012FAB1B7800A1DCA4 /* PrivacyWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302044FB2FAB1B7800A1DCA4 /* PrivacyWebView.swift */; };
+		302045022FAB1B7800A1DCA4 /* SaveService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302044FC2FAB1B7800A1DCA4 /* SaveService.swift */; };
+		302045032FAB1B7800A1DCA4 /* StartMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302044FD2FAB1B7800A1DCA4 /* StartMainView.swift */; };
 		30D2865E2FA0F320008D5BDC /* AppExternalURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D2861B2FA0F320008D5BDC /* AppExternalURL.swift */; };
 		30D2865F2FA0F320008D5BDC /* CompletedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D2861D2FA0F320008D5BDC /* CompletedEvent.swift */; };
 		30D286602FA0F320008D5BDC /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D2861E2FA0F320008D5BDC /* Event.swift */; };
@@ -58,6 +63,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		302044F92FAB1B7800A1DCA4 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
+		302044FA2FAB1B7800A1DCA4 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
+		302044FB2FAB1B7800A1DCA4 /* PrivacyWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyWebView.swift; sourceTree = "<group>"; };
+		302044FC2FAB1B7800A1DCA4 /* SaveService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveService.swift; sourceTree = "<group>"; };
+		302044FD2FAB1B7800A1DCA4 /* StartMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartMainView.swift; sourceTree = "<group>"; };
 		30543C602F917C96000323B9 /* 137Countdown.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 137Countdown.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30D2861B2FA0F320008D5BDC /* AppExternalURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppExternalURL.swift; sourceTree = "<group>"; };
 		30D2861D2FA0F320008D5BDC /* CompletedEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedEvent.swift; sourceTree = "<group>"; };
@@ -130,6 +140,18 @@
 				AB177E12DEFC0421E4F8D697 /* Pods_137Countdown.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		302044FE2FAB1B7800A1DCA4 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				302044F92FAB1B7800A1DCA4 /* AppRouter.swift */,
+				302044FA2FAB1B7800A1DCA4 /* PersistenceManager.swift */,
+				302044FB2FAB1B7800A1DCA4 /* PrivacyWebView.swift */,
+				302044FC2FAB1B7800A1DCA4 /* SaveService.swift */,
+				302044FD2FAB1B7800A1DCA4 /* StartMainView.swift */,
+			);
+			path = Router;
 			sourceTree = "<group>";
 		};
 		3021AB3F79CD858E5A6C1069 /* Pods */ = {
@@ -331,6 +353,7 @@
 				30D2865A2FA0F320008D5BDC /* RootView.swift */,
 				30D2865B2FA0F320008D5BDC /* SceneDelegate.swift */,
 				30D2865C2FA0F320008D5BDC /* ViewController.swift */,
+				302044FE2FAB1B7800A1DCA4 /* Router */,
 			);
 			path = 137Countdown;
 			sourceTree = "<group>";
@@ -457,6 +480,11 @@
 				30D286742FA0F320008D5BDC /* CompletedEventCard.swift in Sources */,
 				30D286752FA0F320008D5BDC /* EventCard.swift in Sources */,
 				30D286762FA0F320008D5BDC /* EventRow.swift in Sources */,
+				302044FF2FAB1B7800A1DCA4 /* AppRouter.swift in Sources */,
+				302045002FAB1B7800A1DCA4 /* PersistenceManager.swift in Sources */,
+				302045012FAB1B7800A1DCA4 /* PrivacyWebView.swift in Sources */,
+				302045022FAB1B7800A1DCA4 /* SaveService.swift in Sources */,
+				302045032FAB1B7800A1DCA4 /* StartMainView.swift in Sources */,
 				30D286772FA0F320008D5BDC /* EventShareCardView.swift in Sources */,
 				30D286782FA0F320008D5BDC /* MiniEventCard.swift in Sources */,
 				30D286792FA0F320008D5BDC /* QuoteCard.swift in Sources */,
@@ -509,7 +537,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = 137Countdown/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "The Vibe: Soul Schedule";
@@ -522,7 +550,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fut.th3v6bs0lsc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -546,7 +574,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = 137Countdown/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "The Vibe: Soul Schedule";
@@ -559,7 +587,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fut.th3v6bs0lsc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
